@@ -8,15 +8,15 @@ Please visit our [documentation site](https://docs.nvidia.com/networking/categor
 
 <hr>
 
-* [Getting Started](#getting-started)
-* [Architecture](#architecture)
-* [Supported Transports](#supported-transports)
-* [Supported CPU Architectures](#supported-cpu-architectures)
-* [Supported NICs](#supported-nics)
-* [Licenses](#licenses)
-* [Information](#information)
-* [Contribution](#contribution)
-* [Configuration](#configuration)
+- [Getting Started](#getting-started)
+- [Architecture](#architecture)
+- [Supported Transports](#supported-transports)
+- [Supported CPU Architectures](#supported-cpu-architectures)
+- [Supported NICs](#supported-nics)
+- [Licenses](#licenses)
+- [Information](#information)
+- [Contribution](#contribution)
+- [Configuration](#configuration)
 
 <hr>
 
@@ -53,6 +53,7 @@ $ ./configure --prefix=/where/to/install --with-dpcp=/where/dpcp/installed --ena
 $ make -j
 $ make install
 ```
+
 --enable-utls : Enables uTLS HW offload for supported NVIDIA HW.
 
 ### Building XLIO using preinstalled dpcp
@@ -68,13 +69,13 @@ $ make install
 
 #### Sockperf
 
-LD_PRELOAD=libxlio.so sockperf \<params\>
+LD_PRELOAD=libxlio.so sockperf \<params>
 
 Reposiroty: [Sockperf](https://github.com/Mellanox/sockperf)
 
 #### nginx
 
-LD_PRELOAD=libxlio.so XLIO_NGINX_WORKERS_NUM=\<N\> nginx \<nginx_params\>
+LD_PRELOAD=libxlio.so XLIO_NGINX_WORKERS_NUM=\<N> nginx \<nginx_params>
 
 N - Number of Nginx workers.
 
@@ -84,30 +85,34 @@ N - Number of Nginx workers.
 
 ## Supported Transports
 
-* IPv4/6
-* TCP
-* UDP
+- IPv4/6
+- TCP
+- UDP
 
 ## Supported CPU Architectures
 
-* [x86_64](https://en.wikipedia.org/wiki/X86-64)
-* [Arm](https://www.arm.com/)
+- [x86_64](https://en.wikipedia.org/wiki/X86-64)
+- [Arm](https://www.arm.com/)
 
 ## Supported NICs
 
-* NVIDIA ConnectX®-6
-* NVIDIA ConnectX®-7
-* NVIDIA BlueField®-2
-* NVIDIA BlueField®-3
+- NVIDIA ConnectX®-6
+- NVIDIA ConnectX®-7
+- NVIDIA BlueField®-2
+- NVIDIA BlueField®-3
 
 ## Licenses
+
 See [LICENSE](./LICENSE) file
 
 ## Information
+
 See [README](./README) file
 
 ## Contribution
+
 [Contribution](./docs/contributing.md) guidelines for this project
 
 ## Configuration
+
 [Configuration](./docs/configuration.md) options description

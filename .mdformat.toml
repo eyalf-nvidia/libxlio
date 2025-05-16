@@ -1,0 +1,3 @@
+# mdformat configuration file
+# The 'number' option when set to true preserves the numbering in ordered lists
+number = true

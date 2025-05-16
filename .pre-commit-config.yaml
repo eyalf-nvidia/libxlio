@@ -54,3 +54,15 @@ repos:
         files: '^(src/.*\.(c|cpp|h|cc)|tools/daemon/.*\.(c|cpp|h|cc)|tests/gtest/.*\.(c|cpp|h|cc))$'
         # Exclude the same files as style.sh
         exclude: '^(src/.*config_.*\..*|tests/gtest/googletest/.*|tests/gtest/.*/tap\.h|tests/gtest/.*/gtest\.h|tests/gtest/.*/gtest-all\.cc)$'
+
+  # Documentation formatting
+  - repo: https://github.com/hukkin/mdformat
+    rev: 0.7.22
+    hooks:
+      - id: mdformat
+        name: "[FORMAT] Markdown"
+        additional_dependencies:
+          - mdformat-gfm          # GitHub-Flavored Markdown support
+          - mdformat-ruff         # Python code formatting
+          - mdformat-frontmatter  # YAML frontmatter support
+          - ruff                  # Required for mdformat-ruff

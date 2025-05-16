@@ -11,6 +11,7 @@ This document describes the styles and patterns used this project. All fresh cod
 - The contents of an outermost **namespace block** (and any nested namespaces with the same scope) should not be indented. The contents of other nested namespaces should be indented.
 
 **Right:**
+
 ```
 namespace MyNamespace {
 
@@ -30,7 +31,9 @@ class MyOtherClass {
 
 }
 ```
+
 **Wrong:**
+
 ```
 namespace MyNamespace {
 
@@ -54,6 +57,7 @@ namespace MyNamespace {
 - A case label should line up with its switch statement. The case statement is indented.
 
 **Right:**
+
 ```
 switch (condition) {
 case foo:
@@ -64,7 +68,9 @@ default:
     i--;
 }
 ```
+
 **Wrong:**
+
 ```
 switch (condition) {
     case foo:
@@ -83,6 +89,7 @@ switch (condition) {
 - Each statement should get its own line.
 
 **Right:**
+
 ```
 x++;
 y++;
@@ -90,7 +97,9 @@ if (condition) {
     do();
 }
 ```
+
 **Wrong:**
+
 ```
 x++; y++;
 if (condition) { do(); }
@@ -101,13 +110,16 @@ if (condition) { do(); }
 - Function definitions: place each brace on its own line.
 
 **Right:**
+
 ```
 int Function()
 {
     ...
 }
 ```
+
 **Wrong:**
+
 ```
 int Function() {
     ...
@@ -117,6 +129,7 @@ int Function() {
 - Other braces: place the open brace on the line preceding the code block; place the close brace on its own line.
 
 **Right:**
+
 ```
 class MyClass {
     ...
@@ -130,7 +143,9 @@ for (int i = 0; i < 10; ++i) {
     ...
 }
 ```
+
 **Wrong:**
+
 ```
 class MyClass
 {
@@ -151,12 +166,15 @@ for (int i = 0; i < 10; ++i)
 - Always brace controlled statements, even a single-line consequent of `if else`. This is redundant, typically, but it avoids dangling else bugs, so it's safer at scale than fine-tuning.
 
 **Right:**
+
 ```
 if (condition) {
     do();
 }
 ```
+
 **Wrong:**
+
 ```
 if (condition) do();
 ```
@@ -167,18 +185,20 @@ if (condition) do();
 
 - Do not place spaces around unary operators.
 
-
 **Right:**
+
 ```
 i++;
 ```
+
 **Wrong:**
+
 ```
 i ++;
 ```
 
 - Use one space around (on each side of) most binary and ternary operators,
-such as any of these:
+  such as any of these:
 
 `	=  +  -  <  >  *  /  %  |  &  ^  <=  >=  ==  !=  ?  :`
 
@@ -188,15 +208,17 @@ but no space after unary operators:
 
 and no space around the `.` and `->` structure member operators.
 
-
 **Right:**
+
 ```
 y = m * x + b;
 f(a, b);
 c = a | b;
 return condition ? 1 : 0;
 ```
+
 **Wrong:**
+
 ```
 y=m*x+b;
 f(a,b);
@@ -207,13 +229,16 @@ return condition ? 1:0;
 - Do not place spaces before comma and semicolon.
 
 **Right:**
+
 ```
 for (int i = 0; i < 10; ++i)
     doSomething();
 
 f(a, b);
 ```
+
 **Wrong:**
+
 ```
 for (int i = 0 ; i < 10 ; ++i)
     doSomething();
@@ -224,11 +249,14 @@ f(a , b) ;
 - Place spaces between control statements and their parentheses.
 
 **Right:**
+
 ```
 if (condition)
     doIt();
 ```
+
 **Wrong:**
+
 ```
 if(condition)
     doIt();
@@ -237,10 +265,13 @@ if(condition)
 - Do not place spaces between a function and its parentheses, or between a parenthesis and its content.
 
 **Right:**
+
 ```
 f(a, b);
 ```
+
 **Wrong:**
+
 ```
 f (a, b);
 f( a, b );
@@ -249,10 +280,13 @@ f( a, b );
 - When initializing an object, place a space before the leading brace as well as between the braces and their content.
 
 **Right:**
+
 ```
 Foo foo { bar };
 ```
+
 **Wrong:**
+
 ```
 Foo foo{ bar };
 Foo foo {bar};
@@ -263,6 +297,7 @@ Foo foo {bar};
 - Data members in C++ classes should be private. Static data members should be prefixed by `"s_"`. Other data members should be prefixed by `"m_"`. Global variables should start with `"g_"`
 
 **Right:**
+
 ```
 int g_variable;
 class String {
@@ -273,7 +308,9 @@ private:
     short m_length;
 };
 ```
+
 **Wrong:**
+
 ```
 int variable;
 class String {
@@ -288,10 +325,13 @@ private:
 - Precede boolean values with words like `"is"`.
 
 **Right:**
+
 ```
 bool isValid;
 ```
+
 **Wrong:**
+
 ```
 bool Valid;
 ```
@@ -299,11 +339,14 @@ bool Valid;
 - Precede setters with the word `"set"`. Precede getters with the word `"get"`.
 
 **Right:**
+
 ```
 void setCount(size_t); // sets m_count
 size_t getCount(); // returns m_count
 ```
+
 **Wrong:**
+
 ```
 void Count(size_t); // sets m_count
 size_t Count(); // returns m_count
@@ -314,10 +357,13 @@ size_t Count(); // returns m_count
 - Put * and & by the variable name rather than the type.
 
 **Right:**
+
 ```
 bool fooBar(bool Baz, char *str, std::vector<int> &Result);
 ```
+
 **Wrong:**
+
 ```
 bool fooBar(bool Baz, char* str, std::vector<int>& Result);
 ```
@@ -326,16 +372,20 @@ bool fooBar(bool Baz, char* str, std::vector<int>& Result);
 
 - Include headers in the following order: `config.h`, Related header, C system headers, C++ standard library headers, other libraries' headers, your project's headers..
 
-    * **Pros:**
-    - Forward declarations can save compile time, as #includes force the compiler to open more files and process more input.
-    - Forward declarations can save on unnecessary recompilation. #includes can force your code to be recompiled more often, due to unrelated changes in the header.
-    * **Cons:**
-    - Forward declarations can hide a dependency, allowing user code to skip necessary recompilation when headers change.
-    - A forward declaration as opposed to an #include statement makes it difficult for automatic tooling to discover the module defining the symbol.
-    - A forward declaration may be broken by subsequent changes to the library. Forward declarations of functions and templates can prevent the header owners from making otherwise-compatible changes to their APIs, such as widening a parameter type, adding a template parameter with a default value, or migrating to a new namespace.
-    - Forward declaring multiple symbols from a header can be more verbose than simply #including the header.
+  - **Pros:**
+
+  * Forward declarations can save compile time, as #includes force the compiler to open more files and process more input.
+  * Forward declarations can save on unnecessary recompilation. #includes can force your code to be recompiled more often, due to unrelated changes in the header.
+
+  - **Cons:**
+
+  * Forward declarations can hide a dependency, allowing user code to skip necessary recompilation when headers change.
+  * A forward declaration as opposed to an #include statement makes it difficult for automatic tooling to discover the module defining the symbol.
+  * A forward declaration may be broken by subsequent changes to the library. Forward declarations of functions and templates can prevent the header owners from making otherwise-compatible changes to their APIs, such as widening a parameter type, adding a template parameter with a default value, or migrating to a new namespace.
+  * Forward declaring multiple symbols from a header can be more verbose than simply #including the header.
 
 **Right:**
+
 ```
 #include "config.h"
 
@@ -358,6 +408,7 @@ bool fooBar(bool Baz, char* str, std::vector<int>& Result);
 - Generally, you want your comments to tell **WHAT** your code does, not **HOW**
 - In general, prefer C++-style comments for one line.
 - The preferred style for long (multi-line) comments is:
+
 ```
 	/* The preferred comment style for (multi-line) comments
 	 * looks like this.
@@ -371,6 +422,7 @@ Fields and methods must be grouped together respectively and regardless of their
 Rationale: fields layout matters in context of padding and cache miss optimizations. Mixing fields and methods complicates visual perception and estimation of the resulting ABI.
 
 **Right:**
+
 ```
 class foo {
 public:
@@ -397,6 +449,7 @@ private:
 Visibility mode doesn't have to be repeated if it is not changed for the block with fields (or methods).
 
 **Right:**
+
 ```
 class bar {
 public:
@@ -415,14 +468,14 @@ private:
 
 *auto* keyword can simplify code, but it can also be harmful. Follow the recommendations:
 
- 1. It is encouraged to use *auto* keyword for an iterator declaration and inside templates if it simplifies the code.
- 2. Keyword *auto* may be used if the initializer is a class name and only if it doesn't complicates code readability and parsing.
- 3. It is discouraged to use *auto* keyword in other situations.
+1. It is encouraged to use *auto* keyword for an iterator declaration and inside templates if it simplifies the code.
+2. Keyword *auto* may be used if the initializer is a class name and only if it doesn't complicates code readability and parsing.
+3. It is discouraged to use *auto* keyword in other situations.
 
 Rationale: there are multiple concerns for *auto* keyword:
 
- * Can hide type of the variable and it will require to put more effort to derive the type and understand impact of the code.
- * Hidden type complicates estimation of bit operations and integer promotion.
- * Complicates parsing of the code, specific places can be unnoticed during conversion or routine changes.
- * Can hide errors since specific code can be compilable after a type change, but become incorrect.
- * Can hide performance critical knowledge (e.g. whether assignment uses copy or reference).
+- Can hide type of the variable and it will require to put more effort to derive the type and understand impact of the code.
+- Hidden type complicates estimation of bit operations and integer promotion.
+- Complicates parsing of the code, specific places can be unnoticed during conversion or routine changes.
+- Can hide errors since specific code can be compilable after a type change, but become incorrect.
+- Can hide performance critical knowledge (e.g. whether assignment uses copy or reference).

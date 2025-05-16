@@ -18,13 +18,13 @@ make -j
 ## Configure Nginx location to use the module
 
 http {
-    ...
-    server {
-        ...
-        location /constant_reply {
-            constant_reply;
-        }
-    }
+...
+server {
+...
+location /constant_reply {
+constant_reply;
+}
+}
 }
 
 ## Send request to the module

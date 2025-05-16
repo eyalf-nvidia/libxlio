@@ -14,7 +14,7 @@ This option manages by symbols visibility of the library.
 
 ### --enable-debug
 
-This option manages  debugging information in the executable, such as the names of variables, the names of functions, and line numbers. This allows a debugger to step through code line by line, set breakpoints, and inspect the values of variables. Final binary file size is increased.
+This option manages debugging information in the executable, such as the names of variables, the names of functions, and line numbers. This allows a debugger to step through code line by line, set breakpoints, and inspect the values of variables. Final binary file size is increased.
 
 ### --enable-nginx
 
@@ -40,6 +40,7 @@ This library should be installed on your system.
 Git repository: https://github.com/mellanox-hpc/libibprof
 
 Example:
+
 ```
 env XLIO_TRACELEVEL=2 LD_PRELOAD=libxlio.so nc -v -n 192.168.3.168 -l 17000
 Listening on 192.168.3.168 17000
