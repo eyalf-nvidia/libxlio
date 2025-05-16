@@ -2547,7 +2547,7 @@ void sockinfo_udp::rx_del_ring_cb(ring *p_ring)
 
     sockinfo::rx_del_ring_cb(p_ring);
 
-    // If no more CQ's are attached on this socket, return CQ polling loops ot init state
+    // If no more CQ's are attached on this socket, return CQ polling loops to init state
     if (m_rx_ring_map.size() <= 0) {
         if (m_b_blocking) {
             m_loops_to_go = safe_mce_sys().rx_poll_num_init;
@@ -3153,11 +3153,11 @@ timestamps_t *sockinfo_udp::get_socket_timestamps()
 
 void sockinfo_udp::post_dequeue(bool release_buff)
 {
-    mem_buf_desc_t *to_resue = m_rx_pkt_ready_list.get_and_pop_front();
+    mem_buf_desc_t *to_reuse = m_rx_pkt_ready_list.get_and_pop_front();
     IF_STATS(m_p_socket_stats->n_rx_ready_pkt_count--);
     m_n_rx_pkt_ready_list_count--;
     if (release_buff) {
-        reuse_buffer(to_resue);
+        reuse_buffer(to_reuse);
     }
     m_rx_pkt_ready_offset = 0;
 }

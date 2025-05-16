@@ -244,7 +244,7 @@ static struct pbuf *tcp_pbuf_prealloc(u32_t length, struct tcp_pcb *pcb, pbuf_ty
 /** Checks if tcp_write is allowed or not (checks state, snd_buf and snd_queuelen).
  *
  * @param pcb the tcp pcb to check for
- * @param len length of data to send (checked agains snd_buf)
+ * @param len length of data to send (checked against snd_buf)
  * @return ERR_OK if tcp_write is allowed to proceed, another err_t otherwise
  */
 static err_t tcp_write_checks(struct tcp_pcb *pcb, u32_t len)

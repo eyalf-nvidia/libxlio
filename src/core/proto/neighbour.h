@@ -167,7 +167,7 @@ public:
     neigh_entry(neigh_key key, transport_type_t type, bool is_init_resources = true);
     ~neigh_entry() override;
 
-    // Overwrite cach_entry virtual function
+    // Overwrite cache_entry virtual function
     bool is_deletable() override;
     void clean_obj() override;
 

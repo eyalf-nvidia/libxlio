@@ -112,7 +112,7 @@ bool dst_entry_udp::fast_send_fragmented_ipv6(mem_buf_desc_t *p_mem_buf_desc, co
         if (n_num_frags == 0) {
             p_frag_h->ip6f_offlg &= ~IP6F_MORE_FRAG;
         }
-        // offset should be << 3, but need to devide by 8, so no need to change n_ip_frag_offset
+        // offset should be << 3, but need to divide by 8, so no need to change n_ip_frag_offset
         p_frag_h->ip6f_offlg |= IP6F_OFF_MASK & htons(n_ip_frag_offset);
 
         p_ip_hdr->ip6_nxt = IPPROTO_FRAGMENT;
@@ -150,7 +150,7 @@ bool dst_entry_udp::fast_send_fragmented_ipv6(mem_buf_desc_t *p_mem_buf_desc, co
         tmp = p_mem_buf_desc->p_next_desc;
         p_mem_buf_desc->p_next_desc = nullptr;
 
-        // We don't check the return valuse of post send when we reach the HW we consider that we
+        // We don't check the return values of post send when we reach the HW we consider that we
         // completed our job
         p_ring->send_ring_buffer(user_id, p_send_wqe, attr);
 
@@ -379,7 +379,7 @@ inline bool dst_entry_udp::fast_send_fragmented_ipv4(mem_buf_desc_t *p_mem_buf_d
         tmp = p_mem_buf_desc->p_next_desc;
         p_mem_buf_desc->p_next_desc = nullptr;
 
-        // We don't check the return valuse of post send when we reach the HW we consider that we
+        // We don't check the return values of post send when we reach the HW we consider that we
         // completed our job
         send_ring_buffer(m_id, p_send_wqe, attr);
 

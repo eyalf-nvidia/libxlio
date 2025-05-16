@@ -2472,7 +2472,7 @@ ssize_t sockinfo_tcp::rx(const rx_call_t call_type, iovec *p_iov, ssize_t sz_iov
 
 void sockinfo_tcp::register_timer()
 {
-    // A reused time-wait socket wil try to add a timer although it is already registered.
+    // A reused time-wait socket will try to add a timer although it is already registered.
     // We should avoid calling register_socket_timer_event unnecessarily because it introduces
     // internal-thread locks contention.
     if (!is_timer_registered()) {

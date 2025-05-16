@@ -101,8 +101,8 @@ protected:
     void popup_recv_rings();
 
 private:
-    void devide_buffers_helper(descq_t *rx_reuse, descq_t *buffer_per_ring);
-    int devide_buffers_helper(mem_buf_desc_t *p_mem_buf_desc_list,
+    void divide_buffers_helper(descq_t *rx_reuse, descq_t *buffer_per_ring);
+    int divide_buffers_helper(mem_buf_desc_t *p_mem_buf_desc_list,
                               mem_buf_desc_t **buffer_per_ring);
 
 protected:

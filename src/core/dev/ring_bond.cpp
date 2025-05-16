@@ -359,7 +359,7 @@ int ring_bond::mem_buf_tx_release(mem_buf_desc_t *p_mem_buf_desc_list, bool b_ac
     std::lock_guard<decltype(m_lock_ring_tx)> lock(m_lock_ring_tx);
 
     memset(buffer_per_ring, 0, sizeof(buffer_per_ring));
-    ret = devide_buffers_helper(p_mem_buf_desc_list, buffer_per_ring);
+    ret = divide_buffers_helper(p_mem_buf_desc_list, buffer_per_ring);
 
     for (i = 0; i < m_bond_rings.size(); i++) {
         if (buffer_per_ring[i]) {
@@ -590,7 +590,7 @@ bool ring_bond::reclaim_recv_buffers(descq_t *rx_reuse)
         return false;
     }
 
-    devide_buffers_helper(rx_reuse, buffer_per_ring);
+    divide_buffers_helper(rx_reuse, buffer_per_ring);
 
     for (i = 0; i < m_bond_rings.size(); i++) {
         if (buffer_per_ring[i].size() > 0) {
@@ -633,7 +633,7 @@ void ring_bond::update_cap(ring_slave *slave)
                                           : std::min(m_max_send_sge, slave->get_max_send_sge()));
 }
 
-void ring_bond::devide_buffers_helper(descq_t *rx_reuse, descq_t *buffer_per_ring)
+void ring_bond::divide_buffers_helper(descq_t *rx_reuse, descq_t *buffer_per_ring)
 {
     int last_found_index = 0;
     while (!rx_reuse->empty()) {
@@ -658,7 +658,7 @@ void ring_bond::devide_buffers_helper(descq_t *rx_reuse, descq_t *buffer_per_rin
     }
 }
 
-int ring_bond::devide_buffers_helper(mem_buf_desc_t *p_mem_buf_desc_list,
+int ring_bond::divide_buffers_helper(mem_buf_desc_t *p_mem_buf_desc_list,
                                      mem_buf_desc_t **buffer_per_ring)
 {
     mem_buf_desc_t *buffers_last[MAX_NUM_RING_RESOURCES];

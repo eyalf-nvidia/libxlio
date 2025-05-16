@@ -197,7 +197,7 @@ netlink_wrapper::netlink_wrapper()
 netlink_wrapper::~netlink_wrapper()
 {
     nl_logfine("---> netlink_route_listener DTOR");
-    /* should not call nl_cache_free() for link, neigh, route as nl_cach_mngr_free() does the
+    /* should not call nl_cache_free() for link, neigh, route as nl_cache_mngr_free() does the
      * freeing */
     // nl_cache_free(m_cache_link);
     // nl_cache_free(m_cache_neigh);

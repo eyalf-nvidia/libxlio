@@ -68,7 +68,7 @@ epfd_info::~epfd_info()
     __log_funcall("");
     sockinfo *sock_fd;
 
-    // Meny: going over all handled fds and removing epoll context.
+    // Many: going over all handled fds and removing epoll context.
 
     lock();
 

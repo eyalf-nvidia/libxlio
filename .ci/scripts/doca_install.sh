@@ -99,7 +99,7 @@ EOF
     echo "REPO_CMD=${REPO_CMD}"
 }
 
-# Set up os-dependend variables
+# Set up os-depdependent variables
 map_os_and_arch
 
 # Install DOCA repo GPG key

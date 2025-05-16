@@ -919,7 +919,7 @@ bool sockinfo::attach_receiver(flow_tuple_with_local_if &flow_key)
 #else
         if (flow_key.get_protocol() != PROTO_UDP ||
             (flow_key.get_protocol() == PROTO_UDP &&
-             g_map_udp_resue_port.count(((uint32_t)flow_key.get_family() << 16) |
+             g_map_udp_reuse_port.count(((uint32_t)flow_key.get_family() << 16) |
                                         ntohs(flow_key.get_dst_port()))))
 #endif
         {

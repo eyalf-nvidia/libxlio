@@ -434,7 +434,7 @@ class GTEST_API_ Test {
   // Uses a GTestFlagSaver to save and restore all Google Test flags.
   const internal::GTestFlagSaver* const gtest_flag_saver_;
 
-  // Often a user mis-spells SetUp() as Setup() and spends a long time
+  // Often a user miss-spells SetUp() as Setup() and spends a long time
   // wondering why it is never called by Google Test.  The declaration of
   // the following method is solely for catching such an error at
   // compile time:
@@ -449,7 +449,7 @@ class GTEST_API_ Test {
   // DO NOT OVERRIDE THIS FUNCTION.
   //
   // If you see an error about overriding the following function or
-  // about it being private, you have mis-spelled SetUp() as Setup().
+  // about it being private, you have miss-spelled SetUp() as Setup().
   struct Setup_should_be_spelled_SetUp {};
   virtual Setup_should_be_spelled_SetUp* Setup() { return NULL; }
 
@@ -963,7 +963,7 @@ class Environment {
   virtual void TearDown() {}
  private:
   // If you see an error about overriding the following function or
-  // about it being private, you have mis-spelled SetUp() as Setup().
+  // about it being private, you have miss-spelled SetUp() as Setup().
   struct Setup_should_be_spelled_SetUp {};
   virtual Setup_should_be_spelled_SetUp* Setup() { return NULL; }
 };

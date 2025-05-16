@@ -1,4 +1,4 @@
-# Indicate that we require autoconf 2.59 or later. Ths is needed because we
+# Indicate that we require autoconf 2.59 or later. This is needed because we
 # use some autoconf macros only available in 2.59.
 #
 AC_PREREQ(2.59)

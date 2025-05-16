@@ -31,7 +31,7 @@ using namespace std;
 #if defined(DEFINED_NGINX) || defined(DEFINED_ENVOY)
 
 #if defined(DEFINED_NGINX)
-map_udp_reuse_port_t g_map_udp_resue_port;
+map_udp_reuse_port_t g_map_udp_reuse_port;
 #endif
 
 static int init_worker(int worker_id, int listen_fd);
@@ -291,7 +291,7 @@ static int init_worker(int worker_id, int listen_fd)
                 if (new_udp_sock) {
                     new_udp_sock->copy_sockopt_fork(udp_sock);
 #if defined(DEFINED_NGINX)
-                    g_map_udp_resue_port[family_port] = true;
+                    g_map_udp_reuse_port[family_port] = true;
 #endif
                     // in order to create new steering rules we call bind()
                     // we skip os.bind since it always fails

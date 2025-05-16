@@ -62,7 +62,7 @@ void rfs_uc::prepare_flow_spec()
         if (m_flow_tuple.get_protocol() != PROTO_UDP)
 #else
         if (m_flow_tuple.get_protocol() != PROTO_UDP ||
-            (g_map_udp_resue_port.count(((uint32_t)m_flow_tuple.get_family() << 16) |
+            (g_map_udp_reuse_port.count(((uint32_t)m_flow_tuple.get_family() << 16) |
                                         ntohs(m_flow_tuple.get_dst_port()))))
 #endif
         {

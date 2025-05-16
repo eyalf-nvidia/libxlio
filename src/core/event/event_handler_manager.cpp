@@ -615,7 +615,7 @@ void event_handler_manager::priv_register_rdma_cm_events(rdma_cm_reg_info_t &inf
         event_handler_rdma_cm_map_t::iterator iter_id =
             iter_fd->second.rdma_cm_ev.map_rdma_cm_id.find(info.id);
         if (iter_id == iter_fd->second.rdma_cm_ev.map_rdma_cm_id.end()) {
-            evh_logdbg("Adding to exitsing channel fd %d (id %p, handler %p)", info.fd, info.id,
+            evh_logdbg("Adding to existing channel fd %d (id %p, handler %p)", info.fd, info.id,
                        info.handler);
             iter_fd->second.rdma_cm_ev.map_rdma_cm_id[info.id] = info.handler;
             iter_fd->second.rdma_cm_ev.n_ref_count++;
