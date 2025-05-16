@@ -448,7 +448,7 @@ int mce_sys_var::env_to_cpuset(char *orig_start, cpu_set_t *cpu_set)
     /*
      * We expect a hex number or comma delimited cpulist.  Check for
      * starting characters of "0x" or "0X" and if present then parse
-     * the string as a hexidecimal value, otherwise treat it as a
+     * the string as a hexadecimal value, otherwise treat it as a
      * cpulist.
      */
     if ((strlen(start) > 2) && (start[0] == '0') && ((start[1] == 'x') || (start[1] == 'X'))) {

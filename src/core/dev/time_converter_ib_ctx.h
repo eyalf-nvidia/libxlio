@@ -24,8 +24,8 @@ public:
 
 private:
     struct ibv_context *m_p_ibv_context;
-    ctx_timestamping_params_t m_ctx_convert_parmeters[2];
-    int m_ctx_parmeters_id;
+    ctx_timestamping_params_t m_ctx_convert_parameters[2];
+    int m_ctx_parameters_id;
 
     void fix_hw_clock_deviation();
     inline void calculate_delta(struct timespec &hw_to_timespec, uint64_t hca_core_clock,

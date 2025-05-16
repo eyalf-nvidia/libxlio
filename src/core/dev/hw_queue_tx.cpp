@@ -931,11 +931,11 @@ static inline void nvme_fill_progress_wqe(mlx5e_set_nvmeotcp_progress_params_wqe
     memset(wqe, 0, sizeof(*wqe));
     auto cseg = &wqe->ctrl.ctrl;
 
-    size_t progres_params_ds = DIV_ROUND_UP(sizeof(*wqe), MLX5_SEND_WQE_DS);
+    size_t progress_params_ds = DIV_ROUND_UP(sizeof(*wqe), MLX5_SEND_WQE_DS);
     cseg->opmod_idx_opcode =
         htobe32(((producer_index & 0xffff) << 8) | XLIO_MLX5_OPCODE_SET_PSV |
                 (MLX5_CTRL_SEGMENT_OPC_MOD_UMR_NVMEOTCP_TIS_PROGRESS_PARAMS << 24));
-    cseg->qpn_ds = htobe32((qpn << MLX5_WQE_CTRL_QPN_SHIFT) | progres_params_ds);
+    cseg->qpn_ds = htobe32((qpn << MLX5_WQE_CTRL_QPN_SHIFT) | progress_params_ds);
     cseg->fm_ce_se = fence_flags;
 
     mlx5_seg_nvmeotcp_progress_params *params = &wqe->params;

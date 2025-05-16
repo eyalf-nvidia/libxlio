@@ -64,7 +64,7 @@ public:
      * Returns: >=0 the total number of wce processed
      *          < 0 error
      */
-    int global_ring_drain_and_procces();
+    int global_ring_drain_and_process();
 
     void global_ring_adapt_cq_moderation();
 

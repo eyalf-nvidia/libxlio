@@ -152,7 +152,7 @@ int sockinfo_tcp_ops_nvme::postrouting(pbuf *p, tcp_seg *seg, xlio_send_attr &at
 
     auto nvme_mdesc = dynamic_cast<nvme_pdu_mdesc *>(static_cast<mem_desc *>(p->next->desc.mdesc));
     if (unlikely(!nvme_mdesc)) {
-        si_nvme_logerr("NVME momory descriptor not found");
+        si_nvme_logerr("NVME memory descriptor not found");
         return ERR_RTE;
     }
 

@@ -20,7 +20,7 @@
 #endif /* DEFINED_DIRECT_VERBS */
 
 #ifndef DEFINED_IBV_WC_WITH_VLAN
-//#warning probaly you are trying to compile on OFED which doesnt support VLAN for RAW QP.
+//#warning probably you are trying to compile on OFED which doesnt support VLAN for RAW QP.
 //#error when you see this then you need to manually open the below comment and to comment the
 // current and the previous lines. #define IBV_WC_WITH_VLAN		1 << 3
 #endif

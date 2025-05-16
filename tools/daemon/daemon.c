@@ -340,7 +340,7 @@ static void usage(void)
 
     printf("Usage: " MODULE_NAME " [options]\n"
            "\t--console                       Enable foreground mode (default: %s)\n"
-           "\t--notify-dir                    Sets the outout dir used by daemon (default: %s)\n"
+           "\t--notify-dir                    Sets the output dir used by daemon (default: %s)\n"
            "\t--pid,-p <num>                  Set prime number as maximum of processes per node. "
            "(default: %d).\n"
            "\t--fid,-f <num>                  Set prime number as maximum of sockets per process. "

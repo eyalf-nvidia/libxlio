@@ -22,7 +22,7 @@ Please visit our [documentation site](https://docs.nvidia.com/networking/categor
 
 ## Getting Started
 
-### Prerequisits
+### Prerequisites
 
 #### Driver Stack
 

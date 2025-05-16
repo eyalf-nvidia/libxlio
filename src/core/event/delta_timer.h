@@ -67,7 +67,7 @@ public:
     // return the timeout needed. (or INFINITE_TIMEOUT if there's no timeout)
     int update_timeout();
 
-    // run "tick" func for all the registered timer handler that their timeout expiered
+    // run "tick" func for all the registered timer handler that their timeout expired
     void process_registered_timers();
 
     void process_registered_timers_uncond();

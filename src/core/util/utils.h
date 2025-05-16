@@ -89,7 +89,7 @@ int get_sys_max_fd_num(int def_max_fd = 1024);
 
 /**
  * iovec extensions
- * Returns total bytes copyed
+ * Returns total bytes copied
  */
 int memcpy_fromiovec(u_int8_t *p_dst, const struct iovec *p_iov, size_t sz_iov,
                      size_t sz_src_start_offset, size_t sz_data);
@@ -117,11 +117,11 @@ void set_fd_block_mode(int fd, bool block);
 bool compare_double(double a, double b);
 
 /**
- * Run a system command while bypassing LD_PRELOADed with XLIO
- * @param cmd_line to be exceuted wiout XLIO in process space
+ * Run a system command while bypassing LD_PRELOAD-ed with XLIO
+ * @param cmd_line to be executed wiout XLIO in process space
  * @param return_str is the output of the system call
  */
-int run_and_retreive_system_command(const char *cmd_line, char *return_str, int return_str_len);
+int run_and_retrieve_system_command(const char *cmd_line, char *return_str, int return_str_len);
 
 const char *iphdr_protocol_type_to_str(const int type);
 
@@ -298,7 +298,7 @@ inline std::string to_string_val(const int &k)
 static inline int get_procname(int pid, char *proc, size_t size)
 {
     char app_full_name[PATH_MAX] = {0};
-    char proccess_proc_dir[FILE_NAME_MAX_SIZE] = {0};
+    char process_proc_dir[FILE_NAME_MAX_SIZE] = {0};
     char *app_base_name = nullptr;
     int n = -1;
 
@@ -306,9 +306,9 @@ static inline int get_procname(int pid, char *proc, size_t size)
         return -1;
     }
 
-    n = snprintf(proccess_proc_dir, sizeof(proccess_proc_dir), "/proc/%d/exe", pid);
-    if (likely((0 < n) && (n < (int)sizeof(proccess_proc_dir)))) {
-        n = readlink(proccess_proc_dir, app_full_name, sizeof(app_full_name) - 1);
+    n = snprintf(process_proc_dir, sizeof(process_proc_dir), "/proc/%d/exe", pid);
+    if (likely((0 < n) && (n < (int)sizeof(process_proc_dir)))) {
+        n = readlink(process_proc_dir, app_full_name, sizeof(app_full_name) - 1);
         if (n > 0) {
             app_full_name[n] = '\0';
             app_base_name = strrchr(app_full_name, '/');
@@ -457,7 +457,7 @@ private:
 };
 
 // Returns the filesystem's inode number for the given 'fd' using 'fstat' system call that assumes
-// 32 bit inodes This should be safe for 'proc' filesytem and for standard filesystems
+// 32 bit inodes This should be safe for 'proc' filesystem and for standard filesystems
 uint32_t fd2inode(int fd);
 
 /**

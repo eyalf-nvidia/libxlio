@@ -110,7 +110,7 @@ static ngx_int_t ngx_http_constant_reply_handler(ngx_http_request_t *r)
     off_t buffer_size = static_cast<off_t>(buf_size_val);
     auto itr = g_constant_reply_buffers.find(buffer_size);
     if (itr == g_constant_reply_buffers.end()) {
-        // Allocate global buffer accordng the content-type header.
+        // Allocate global buffer according the content-type header.
         u_char *buffptr = (u_char *)malloc((size_t)buffer_size);
         if (!buffptr) {
             buffptr = (u_char *)malloc(1);

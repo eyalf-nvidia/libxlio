@@ -113,8 +113,8 @@ public:
         }
     };
 
-    /* returns the distance in bytes from the begining of the PDU containing the given seqno and
-     * resets the internal state to the appropriate iov. In case of failiure returns m_length */
+    /* returns the distance in bytes from the beginning of the PDU containing the given seqno and
+     * resets the internal state to the appropriate iov. In case of failure returns m_length */
     size_t reset(uint32_t seqno);
     chunk next_chunk(size_t length);
 

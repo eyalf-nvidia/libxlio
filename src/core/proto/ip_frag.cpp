@@ -290,7 +290,7 @@ int ip_frag_manager::add_frag(ip6_hdr *hdr, mem_buf_desc_t *frag, mem_buf_desc_t
  * O(1) if packets are coming in order or reverse order
  * O(n^2) for random fragments, where n is number of fragments
  * returns: 0 if finished OK (if the packet is complete - put it in ret)
- * 		   -1 if finished not OK and this packet needs to be droped
+ * 		   -1 if finished not OK and this packet needs to be dropped
  */
 int ip_frag_manager::add_frag(iphdr *hdr, mem_buf_desc_t *frag, mem_buf_desc_t **ret)
 {

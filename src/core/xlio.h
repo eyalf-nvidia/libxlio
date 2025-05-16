@@ -36,7 +36,7 @@ int xlio_accept4(int __fd, struct sockaddr *__addr, socklen_t *__addrlen, int __
 
 int xlio_bind(int __fd, const struct sockaddr *__addr, socklen_t __addrlen);
 
-int xlio_connect(int __fd, const struct sockaddr *__to, socklen_t __tolen);
+int xlio_connect(int __fd, const struct sockaddr *__to, socklen_t __token);
 
 int xlio_setsockopt(int __fd, int __level, int __optname, __const void *__optval,
                     socklen_t __optlen);
@@ -80,7 +80,7 @@ ssize_t xlio_sendmsg(int __fd, __const struct msghdr *__msg, int __flags);
 int xlio_sendmmsg(int __fd, struct mmsghdr *__mmsghdr, unsigned int __vlen, int __flags);
 
 ssize_t xlio_sendto(int __fd, __const void *__buf, size_t __nbytes, int __flags,
-                    const struct sockaddr *__to, socklen_t __tolen);
+                    const struct sockaddr *__to, socklen_t __token);
 
 ssize_t xlio_sendfile(int out_fd, int in_fd, off_t *offset, size_t count);
 
@@ -246,7 +246,7 @@ int xlio_extra_ioctl(void *cmsg_hdr, size_t cmsg_len);
  *
  * @param s Socket file descriptor.
  * @param callback Callback function.
- * @param context user contex for callback function.
+ * @param context user context for callback function.
  * @return 0 - success, -1 - error
  *
  * errno is set to: EINVAL - not offloaded socket
@@ -424,7 +424,7 @@ int xlio_socket_destroy(xlio_socket_t sock);
 int xlio_socket_setsockopt(xlio_socket_t sock, int level, int optname, const void *optval,
                            socklen_t optlen);
 int xlio_socket_bind(xlio_socket_t sock, const struct sockaddr *addr, socklen_t addrlen);
-int xlio_socket_connect(xlio_socket_t sock, const struct sockaddr *to, socklen_t tolen);
+int xlio_socket_connect(xlio_socket_t sock, const struct sockaddr *to, socklen_t token);
 struct ibv_pd *xlio_socket_get_pd(xlio_socket_t sock);
 
 /*

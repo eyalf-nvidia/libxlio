@@ -100,7 +100,7 @@ typedef enum { e_K = 1024, e_M = 1048576 } units_t;
 #define DEFAULT_CYCLES          0
 #define DEFAULT_VIEW_MODE       e_basic
 #define DEFAULT_DETAILS_MODE    e_totals
-#define DEFAULT_PROC_IDENT_MODE e_by_runn_proccess
+#define DEFAULT_PROC_IDENT_MODE e_by_run_process
 #define VLOG_DETAILS_NUM        4
 #define INIT_XLIO_LOG_DETAILS   -1
 #define NANO_TO_MICRO(n)        (((n) + 500) / 1000)
@@ -1263,13 +1263,13 @@ void print_version(int pid)
     } else {
         printf(MODULE_NAME ": stats for ");
         if (print_app_name(pid) < 0) {
-            printf("proccess ");
+            printf("process ");
         }
         printf("with pid: %d\n", pid);
     }
 }
 
-int check_xlio_ver_compatability(version_info_t *p_stat_ver_info)
+int check_xlio_ver_compatibility(version_info_t *p_stat_ver_info)
 {
     return (p_stat_ver_info->xlio_lib_maj == PRJ_LIBRARY_MAJOR &&
             p_stat_ver_info->xlio_lib_min == PRJ_LIBRARY_MINOR &&
@@ -1357,13 +1357,13 @@ void set_defaults()
 
 bool check_if_process_running(char *pid_str)
 {
-    char proccess_proc_dir[FILE_NAME_MAX_SIZE] = {0};
+    char process_proc_dir[FILE_NAME_MAX_SIZE] = {0};
     struct stat st;
     int n = -1;
 
-    n = snprintf(proccess_proc_dir, sizeof(proccess_proc_dir), "/proc/%s", pid_str);
-    if (likely((0 < n) && (n < (int)sizeof(proccess_proc_dir)))) {
-        return stat(proccess_proc_dir, &st) == 0;
+    n = snprintf(process_proc_dir, sizeof(process_proc_dir), "/proc/%s", pid_str);
+    if (likely((0 < n) && (n < (int)sizeof(process_proc_dir)))) {
+        return stat(process_proc_dir, &st) == 0;
     }
     return false;
 }
@@ -1583,7 +1583,7 @@ void stats_reader_handler(sh_mem_t *p_sh_mem, int pid)
         proc_running = check_if_process_running(pid);
     }
     if (!proc_running) {
-        log_msg("Proccess %d ended - exiting", pid);
+        log_msg("Process %d ended - exiting", pid);
     }
 
 out:
@@ -1594,13 +1594,13 @@ out:
 bool check_if_app_match(char *app_name, char *pid_str)
 {
     char app_full_name[PATH_MAX] = {0};
-    char proccess_proc_dir[FILE_NAME_MAX_SIZE] = {0};
+    char process_proc_dir[FILE_NAME_MAX_SIZE] = {0};
     char *app_base_name = NULL;
     int n = -1;
 
-    n = snprintf(proccess_proc_dir, sizeof(proccess_proc_dir), "/proc/%s/exe", pid_str);
-    if (likely((0 < n) && (n < (int)sizeof(proccess_proc_dir)))) {
-        n = readlink(proccess_proc_dir, app_full_name, sizeof(app_full_name) - 1);
+    n = snprintf(process_proc_dir, sizeof(process_proc_dir), "/proc/%s/exe", pid_str);
+    if (likely((0 < n) && (n < (int)sizeof(process_proc_dir)))) {
+        n = readlink(process_proc_dir, app_full_name, sizeof(app_full_name) - 1);
         if (n > 0) {
             app_full_name[n] = '\0';
             app_base_name = strrchr(app_full_name, '/');
@@ -1628,9 +1628,9 @@ void clean_inactive_sh_ibj()
     dirent = readdir(dir);
     while (dirent != NULL && !user_params.forbid_cleaning) {
         if (!strncmp("xliostat.", dirent->d_name, module_name_size)) {
-            bool proccess_running = false;
-            proccess_running = check_if_process_running(dirent->d_name + pid_offset);
-            if (!proccess_running) {
+            bool process_running = false;
+            process_running = check_if_process_running(dirent->d_name + pid_offset);
+            if (!process_running) {
                 char to_delete[PATH_MAX + 1] = {0};
                 int n = -1;
 
@@ -1717,7 +1717,7 @@ int update_range_of_fds(char *left_str, char *right_str)
     return 0;
 }
 
-int analize_fds_range(char *range)
+int analyze_fds_range(char *range)
 {
     char *left = range;
     char *right = NULL;
@@ -1749,7 +1749,7 @@ int update_fds_mask(char *fds_list)
     char *curr_fds_range = NULL;
     curr_fds_range = strtok(fds_list, delims);
     while (curr_fds_range != NULL) {
-        if (analize_fds_range(curr_fds_range)) {
+        if (analyze_fds_range(curr_fds_range)) {
             return 1;
         }
         curr_fds_range = strtok(NULL, delims);
@@ -1869,7 +1869,7 @@ int get_pid(char *proc_desc, char *argv0)
             };
             free(pid_str);
         } else {
-            log_err("Failed to identify process please provide pid of active proccess...\n");
+            log_err("Failed to identify process please provide pid of active process...\n");
         }
     }
 
@@ -2083,7 +2083,7 @@ int main(int argc, char **argv)
             proc_desc[sizeof(proc_desc) - 1] = '\0';
             break;
         case 'f':
-            user_params.proc_ident_mode = e_by_runn_proccess;
+            user_params.proc_ident_mode = e_by_run_process;
             break;
         case 'F':
             user_params.forbid_cleaning = true;
@@ -2171,7 +2171,7 @@ int init_print_process_stats(sh_mem_info_t &sh_mem_info)
             version_check = 0;
         }
     } else {
-        if (!check_xlio_ver_compatability(&sh_mem->ver_info)) {
+        if (!check_xlio_ver_compatibility(&sh_mem->ver_info)) {
             log_err("Version %d.%d.%d.%d is not compatible with " PRODUCT_NAME
                     " version %d.%d.%d.%d\n",
                     PRJ_LIBRARY_MAJOR, PRJ_LIBRARY_MINOR, PRJ_LIBRARY_REVISION, PRJ_LIBRARY_RELEASE,

@@ -29,12 +29,12 @@ time_converter_ib_ctx::time_converter_ib_ctx(struct ibv_context *ctx,
                                              ts_conversion_mode_t ctx_time_converter_mode,
                                              uint64_t hca_core_clock)
     : m_p_ibv_context(ctx)
-    , m_ctx_parmeters_id(0)
+    , m_ctx_parameters_id(0)
 {
 #ifdef DEFINED_IBV_CQ_TIMESTAMP
     if (ctx_time_converter_mode != TS_CONVERSION_MODE_DISABLE) {
         ctx_timestamping_params_t *current_parameters_set =
-            &m_ctx_convert_parmeters[m_ctx_parmeters_id];
+            &m_ctx_convert_parameters[m_ctx_parameters_id];
 
         m_converter_status = TS_CONVERSION_MODE_RAW;
         current_parameters_set->hca_core_clock = hca_core_clock * USEC_PER_SEC;
@@ -76,7 +76,7 @@ void time_converter_ib_ctx::handle_timer_expired(void *user_data)
 
 uint64_t time_converter_ib_ctx::get_hca_core_clock()
 {
-    return m_ctx_convert_parmeters[m_ctx_parmeters_id].hca_core_clock;
+    return m_ctx_convert_parameters[m_ctx_parameters_id].hca_core_clock;
 }
 
 #ifdef DEFINED_IBV_CQ_TIMESTAMP
@@ -117,7 +117,7 @@ bool time_converter_ib_ctx::sync_clocks(struct timespec *st, uint64_t *hw_clock)
 void time_converter_ib_ctx::fix_hw_clock_deviation()
 {
     ctx_timestamping_params_t *current_parameters_set =
-        &m_ctx_convert_parmeters[m_ctx_parmeters_id];
+        &m_ctx_convert_parameters[m_ctx_parameters_id];
 
     if (!current_parameters_set->hca_core_clock) {
         return;
@@ -125,8 +125,8 @@ void time_converter_ib_ctx::fix_hw_clock_deviation()
 
     struct timespec current_time, diff_systime;
     uint64_t diff_hw_time, diff_systime_nano, estimated_hw_time, hw_clock;
-    int next_id = (m_ctx_parmeters_id + 1) % 2;
-    ctx_timestamping_params_t *next_parameters_set = &m_ctx_convert_parmeters[next_id];
+    int next_id = (m_ctx_parameters_id + 1) % 2;
+    ctx_timestamping_params_t *next_parameters_set = &m_ctx_convert_parameters[next_id];
     int64_t deviation_hw;
 
     if (!sync_clocks(&current_time, &hw_clock)) {
@@ -157,7 +157,7 @@ void time_converter_ib_ctx::fix_hw_clock_deviation()
     next_parameters_set->sync_hw_clock = hw_clock;
     next_parameters_set->sync_systime = current_time;
 
-    m_ctx_parmeters_id = next_id;
+    m_ctx_parameters_id = next_id;
 }
 
 #else
@@ -187,7 +187,7 @@ void time_converter_ib_ctx::convert_hw_time_to_system_time(uint64_t hwtime,
 {
 
     ctx_timestamping_params_t *current_parameters_set =
-        &m_ctx_convert_parmeters[m_ctx_parmeters_id];
+        &m_ctx_convert_parameters[m_ctx_parameters_id];
     if (current_parameters_set->hca_core_clock && hwtime) {
 
         struct timespec hw_to_timespec, sync_systime;

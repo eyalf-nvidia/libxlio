@@ -26,7 +26,7 @@ Once you've successfully created a YAML workflow file and triggered the workflow
 
 ## Update Jenkins
 
-If proj_jjb.yaml was changed pipline configuration should be updated
+If proj_jjb.yaml was changed pipeline configuration should be updated
 
 ```
    cd .ci

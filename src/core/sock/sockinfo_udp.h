@@ -67,11 +67,11 @@ public:
     }
     bool isPassthrough() override { return !m_sock_offload; }
 
-    int prepare_to_connect(const sockaddr *__to, socklen_t __tolen);
+    int prepare_to_connect(const sockaddr *__to, socklen_t __token);
 
     int bind_no_os();
     int bind(const struct sockaddr *__addr, socklen_t __addrlen) override;
-    int connect(const struct sockaddr *__to, socklen_t __tolen) override;
+    int connect(const struct sockaddr *__to, socklen_t __token) override;
     void clean_socket_obj() override { delete this; }
     bool is_writeable() override { return true; };
     bool is_errorable(int *errors) override
@@ -102,7 +102,7 @@ public:
      */
     void set_immediate_os_sample() override;
     /**
-     * Reseting m_rx_udp_poll_os_ratio_counter counter to prevent sampling OS immediately
+     * Resetting m_rx_udp_poll_os_ratio_counter counter to prevent sampling OS immediately
      */
     void unset_immediate_os_sample() override;
     /**
@@ -121,7 +121,7 @@ public:
      */
     bool is_readable(uint64_t *p_poll_sn, fd_array_t *p_fd_array = nullptr) override;
     /**
-     * Arm the event channel(s) assosiated with this sockinfo
+     * Arm the event channel(s) associated with this sockinfo
      * Fill the fd_set (p_rxfds) with the correct fd channel values and the p_nfds with the (max_fd
      * + 1) Fill the p_cq_mgr_fd_map with the pointer to the cq_mgr_rx asosiated with the fd Return
      * count of channels (fds) that where mapped

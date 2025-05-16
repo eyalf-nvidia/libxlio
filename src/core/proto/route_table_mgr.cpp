@@ -401,7 +401,7 @@ void route_table_mgr::del_route_event(const route_val &netlink_route_val)
     route_table_t &table = netlink_route_val.get_family() == AF_INET ? m_table_in4 : m_table_in6;
     std::lock_guard<decltype(m_lock)> lock(m_lock);
 
-    // We cannot erase elements in the array, because this would invalide pointers
+    // We cannot erase elements in the array, because this would invalid pointers
     for (auto iter = table.begin(); iter != table.end(); ++iter) {
         if (*iter == netlink_route_val) {
             (*iter).set_deleted(true);

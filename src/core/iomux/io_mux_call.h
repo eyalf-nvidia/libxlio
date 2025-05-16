@@ -142,7 +142,7 @@ public:
         }
     }
 
-    virtual bool immidiate_return(int &poll_os_countdown);
+    virtual bool immediate_return(int &poll_os_countdown);
     /**
      * @class io_error
      * Exception by OS IO functions.
@@ -238,7 +238,7 @@ protected:
     /// xlio statistics. each implementation must initialize this.
     iomux_func_stats_t *m_p_stats;
 
-    /// timer managment
+    /// timer management
     timeval m_start, m_elapsed;
 
     /// number of total ready fds (r + w + x)
@@ -254,7 +254,7 @@ protected:
     /// number of ready e fds
     int m_n_ready_efds;
 
-    /// collect the ready fds in the begining of the call
+    /// collect the ready fds in the beginning of the call
     fd_array_t m_fd_ready_array;
 
     const sigset_t *m_sigmask;

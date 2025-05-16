@@ -118,7 +118,7 @@ again:
     while (len > 0) {
         if (len < (int)sizeof(struct xlio_hdr)) {
             rc = -EBADMSG;
-            log_error("Invalid message lenght from %s as %d errno %d (%s)\n",
+            log_error("Invalid message length from %s as %d errno %d (%s)\n",
                       (addrlen > 0 ? peeraddr.sun_path : "n/a"), len, errno, strerror(errno));
             goto err;
         }

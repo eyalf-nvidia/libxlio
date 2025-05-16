@@ -586,7 +586,7 @@ int sockinfo::setsockopt(int __level, int __optname, const void *__optval, sockl
             if (__optval && __optlen == sizeof(int)) {
                 int val = *(int *)__optval;
                 m_bind_no_port = !!val;
-                // In TCP connect flow we don't call os.connect, as oposed to UDP connect flow.
+                // In TCP connect flow we don't call os.connect, as opposed to UDP connect flow.
                 // Therefore, UDP flow can support IP_BIND_ADDRESS_NO_PORT out-of-box using kernel
                 // calls.
                 ret = (PROTO_TCP == get_protocol()) ? SOCKOPT_INTERNAL_XLIO_SUPPORT
@@ -2265,7 +2265,7 @@ ssize_t sockinfo::rx_os(const rx_call_t call_type, iovec *p_iov, ssize_t sz_iov,
 }
 
 ssize_t sockinfo::tx_os(const tx_call_t call_type, const iovec *p_iov, const ssize_t sz_iov,
-                        const int __flags, const sockaddr *__to, const socklen_t __tolen)
+                        const int __flags, const sockaddr *__to, const socklen_t __token)
 {
     errno = 0;
 
@@ -2290,7 +2290,7 @@ ssize_t sockinfo::tx_os(const tx_call_t call_type, const iovec *p_iov, const ssi
 
     case TX_SENDTO:
         __log_info_func("calling os transmit with orig sendto");
-        return SYSCALL(sendto, m_fd, p_iov[0].iov_base, p_iov[0].iov_len, __flags, __to, __tolen);
+        return SYSCALL(sendto, m_fd, p_iov[0].iov_base, p_iov[0].iov_len, __flags, __to, __token);
 
     case TX_SENDMSG: {
         msghdr __message;
@@ -2298,7 +2298,7 @@ ssize_t sockinfo::tx_os(const tx_call_t call_type, const iovec *p_iov, const ssi
         __message.msg_iov = (iovec *)p_iov;
         __message.msg_iovlen = sz_iov;
         __message.msg_name = (void *)__to;
-        __message.msg_namelen = __tolen;
+        __message.msg_namelen = __token;
 
         __log_info_func("calling os transmit with orig sendmsg");
         return SYSCALL(sendmsg, m_fd, &__message, __flags);

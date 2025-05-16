@@ -28,7 +28,7 @@ struct nl_req {
  * Initialize a netlink object for communicating with the kernel.
  *
  * @return
- *     the newly allocated netlink object. Must be freed with nl_destory.
+ *     the newly allocated netlink object. Must be freed with nl_destroy.
  */
 nl_t nl_create(void);
 

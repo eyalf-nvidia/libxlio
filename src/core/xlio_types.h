@@ -208,7 +208,7 @@ struct __attribute__((packed)) xlio_recvfrom_zcopy_packets_t {
  */
 struct __attribute__((packed)) xlio_info_t {
     size_t
-        struct_sz; /* Compare this value with sizeof(xlio_info_t) to check version compatability */
+        struct_sz; /* Compare this value with sizeof(xlio_info_t) to check version compatibility */
     void *packet_id; /* Handle to received packet buffer to be return if zero copy logic is used */
 
     /* Packet addressing information (in network byte order) */

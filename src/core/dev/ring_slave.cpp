@@ -352,7 +352,7 @@ bool steering_handler<KEY4T, KEY2T, HDR>::attach_flow(flow_tuple &flow_spec_5t, 
     bool ret = p_rfs->attach_flow(sink);
     if (ret) {
         if (flow_tag_id && (flow_tag_id != FLOW_TAG_MASK)) {
-            // A flow with FlowTag was attached succesfully, check stored rfs for fast path be
+            // A flow with FlowTag was attached successfully, check stored rfs for fast path be
             // tag_id
             si->set_flow_tag(flow_tag_id);
             ring_logdbg("flow_tag: %d registration is done!", flow_tag_id);
@@ -908,7 +908,7 @@ bool steering_handler<KEY4T, KEY2T, HDR>::rx_process_buffer_no_flow_id(
         return false;
     }
 
-    // Read fragmentation parameters and extention headers for IPv6.
+    // Read fragmentation parameters and extension headers for IPv6.
     ext_hdr_data hdr_data;
     hdr_parse(p_ip_h, hdr_data, sz_data);
 

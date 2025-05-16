@@ -36,7 +36,7 @@ public:
      * IFF_LOOPBACK		Link loopback network
      * IFF_POINTOPOINT	Point-to-point link
      * IFF_NOARP		ARP is not supported
-     * IFF_PROMISC		Status of promiscious mode
+     * IFF_PROMISC		Status of promiscuous mode
      * IFF_MASTER		Master of a load balancer (bonding)
      * IFF_SLAVE		Slave to a master link
      * IFF_PORTSEL		Driver supports setting media type (only used by ARM ethernet)

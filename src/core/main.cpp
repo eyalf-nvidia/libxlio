@@ -110,7 +110,7 @@ static int free_libxlio_resources()
 
     // Handle pending received data, this is critical for proper TCP connection termination
     if (g_p_net_device_table_mgr) {
-        g_p_net_device_table_mgr->global_ring_drain_and_procces();
+        g_p_net_device_table_mgr->global_ring_drain_and_process();
     }
 
     if (g_p_event_handler_manager) {
@@ -393,7 +393,7 @@ const char *buffer_batching_mode_str(buffer_batching_mode_t buffer_batching_mode
 
 int get_ofed_version_info(char *ofed_version_str, int len)
 {
-    return run_and_retreive_system_command("ofed_info -s 2>/dev/null | head -1 | tr -d '\n'",
+    return run_and_retrieve_system_command("ofed_info -s 2>/dev/null | head -1 | tr -d '\n'",
                                            ofed_version_str, len);
 }
 

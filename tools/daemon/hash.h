@@ -29,7 +29,7 @@ typedef void (*hash_freefunc_t)(void *);
  * @param free_func - user defined function for destroy data
  *       inserted into hash
  * @param size - size of hash that should be Prime number
- * @return the newly allocated hash table. Must be freed with hash_destory.
+ * @return the newly allocated hash table. Must be freed with hash_destroy.
  */
 hash_t hash_create(hash_freefunc_t free_func, size_t size);
 

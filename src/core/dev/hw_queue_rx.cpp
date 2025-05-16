@@ -180,7 +180,7 @@ void hw_queue_rx::release_rx_buffers()
            !is_rq_empty() && !m_p_ib_ctx_handler->is_removed()) {
 
         // Process the FLUSH'ed WQE's
-        int ret = m_p_cq_mgr_rx->drain_and_proccess(&last_polled_rx_wr_id);
+        int ret = m_p_cq_mgr_rx->drain_and_process(&last_polled_rx_wr_id);
         hwqrx_logdbg("draining completed on cq_mgr_rx (%d wce) last_polled_rx_wr_id = %lu", ret,
                      last_polled_rx_wr_id);
 
@@ -441,7 +441,7 @@ void hw_queue_rx::tls_release_tir(xlio_tir *tir)
 
 void hw_queue_rx::put_tls_tir_in_cache(xlio_tir *tir)
 {
-    // Because the absense of TIR flush command, reusing a TIR
+    // Because the absence of TIR flush command, reusing a TIR
     // may result in undefined behaviour.
     // Until a flush command is available the TIR cache is disabled.
     // Re-enabling TIR cache should also add destroy_tir_cache on ring cleanup.

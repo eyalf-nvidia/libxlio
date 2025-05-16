@@ -373,7 +373,7 @@ typedef int64_t s64_t;
 
 #if LWIP_DEBUG_ENABLE
 
-/* Plaform specific diagnostic output */
+/* Platform specific diagnostic output */
 #define LWIP_PLATFORM_DIAG(x)                                                                      \
     do {                                                                                           \
         printf x;                                                                                  \

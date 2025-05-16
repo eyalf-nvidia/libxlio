@@ -44,7 +44,7 @@
 #define nd_logfunc    __log_info_func
 #define nd_logfuncall __log_info_funcall
 
-// The value given in this constructor is later always overriden
+// The value given in this constructor is later always overridden
 ring_alloc_logic_attr::ring_alloc_logic_attr()
     : m_ring_alloc_logic(RING_LOGIC_PER_THREAD)
     , m_use_locks(true)
@@ -1193,7 +1193,7 @@ int net_device_val::global_ring_request_notification(uint64_t poll_sn_rx, uint64
     return ret_total;
 }
 
-int net_device_val::ring_drain_and_proccess()
+int net_device_val::ring_drain_and_process()
 {
     nd_logfuncall();
     int ret_total = 0;
@@ -1201,7 +1201,7 @@ int net_device_val::ring_drain_and_proccess()
     std::lock_guard<decltype(m_lock)> lock(m_lock);
     rings_hash_map_t::iterator ring_iter;
     for (ring_iter = m_h_ring_map.begin(); ring_iter != m_h_ring_map.end(); ring_iter++) {
-        int ret = THE_RING->drain_and_proccess();
+        int ret = THE_RING->drain_and_process();
         if (ret < 0) {
             return ret;
         }

@@ -490,7 +490,7 @@ void net_device_table_mgr::global_ring_wait_for_notification_and_process_element
     }
 }
 
-int net_device_table_mgr::global_ring_drain_and_procces()
+int net_device_table_mgr::global_ring_drain_and_process()
 {
     ndtm_logfuncall("");
     int ret_total = 0;
@@ -498,7 +498,7 @@ int net_device_table_mgr::global_ring_drain_and_procces()
     net_device_map_index_t::iterator net_dev_iter;
     for (net_dev_iter = m_net_device_map_index.begin();
          m_net_device_map_index.end() != net_dev_iter; net_dev_iter++) {
-        int ret = net_dev_iter->second->ring_drain_and_proccess();
+        int ret = net_dev_iter->second->ring_drain_and_process();
         if (ret < 0 && errno != EAGAIN) {
             ndtm_logerr("Error in ring[%p]->drain() (errno=%d %m)", net_dev_iter->second, errno);
             return ret;
@@ -529,7 +529,7 @@ void net_device_table_mgr::handle_timer_expired(void *user_data)
     int timer_type = (uint64_t)user_data;
     switch (timer_type) {
     case RING_PROGRESS_ENGINE_TIMER:
-        global_ring_drain_and_procces();
+        global_ring_drain_and_process();
         break;
     case RING_ADAPT_CQ_MODERATION_TIMER:
         global_ring_adapt_cq_moderation();

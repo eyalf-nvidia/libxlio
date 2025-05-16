@@ -43,7 +43,7 @@ void check_flow_steering_log_num_mgm_entry_size()
     } else if (flow_steering_val[0] != '-' ||
                (strtol(&flow_steering_val[1], nullptr, 0) % 2) == 0) {
         char module_info[3] = {0};
-        if (!run_and_retreive_system_command("modinfo mlx4_core > /dev/null 2>&1 ; echo $?",
+        if (!run_and_retrieve_system_command("modinfo mlx4_core > /dev/null 2>&1 ; echo $?",
                                              module_info, sizeof(module_info)) &&
             (strlen(module_info) > 0)) {
             if (module_info[0] == '0') {

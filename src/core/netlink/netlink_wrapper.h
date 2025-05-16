@@ -49,7 +49,7 @@ public:
     static void link_cache_callback(nl_object *obj);
     static void route_cache_callback(nl_object *obj);
 
-    /* return fd for the specific netlink instace's channel to kernel
+    /* return fd for the specific netlink instance's channel to kernel
      * the channel is a NON_BLOCKING socket opened as socket(AF_NETLINK, SOCK_RAW, NETLINK_ROUTE)
      * return <0 if channel is not open or failed to open.
      */
@@ -71,7 +71,7 @@ public:
     /*
      * Receive messages, parse, build relevant netlink_events and notify the registered observers.
      * return the number of events or negative number on error
-     * **must first insure that opne_channel was called
+     * **must first insure that open_channel was called
      */
     int handle_events();
 
@@ -82,7 +82,7 @@ public:
      4. Connect to link netlink socket on kernel side
      5. set netlink callback
      6. set the socket non-blocking
-     ** the channel must be opned before calling handle_events()
+     ** the channel must be opened before calling handle_events()
      */
     int open_channel();
 

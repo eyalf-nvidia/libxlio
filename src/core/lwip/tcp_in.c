@@ -607,7 +607,7 @@ static err_t tcp_process(struct tcp_pcb *pcb, tcp_in_data *in_data)
 
             tcp_tx_seg_free(pcb, rseg);
 
-            /* Call the user specified function to call when sucessfully
+            /* Call the user specified function to call when successfully
              * connected. */
             TCP_EVENT_CONNECTED(pcb, ERR_OK, err);
             if (err == ERR_ABRT) {
@@ -1437,7 +1437,7 @@ static void tcp_receive(struct tcp_pcb *pcb, tcp_in_data *in_data)
                     in_data->recv_data = in_data->inseg.p;
                     /* Since this pbuf now is the responsibility of the
                        application, we delete our reference to it so that we won't
-                       (mistakingly) deallocate it. */
+                       (mistakenly) deallocate it. */
                     in_data->inseg.p = NULL;
                 }
                 if (TCPH_FLAGS(in_data->inseg.tcphdr) & TCP_FIN) {
@@ -1536,7 +1536,7 @@ static void tcp_receive(struct tcp_pcb *pcb, tcp_in_data *in_data)
                                 }
                                 break;
                             } else {
-                                /* Either the lenghts are the same or the incoming
+                                /* Either the lengths are the same or the incoming
                                    segment was smaller than the old one; in either
                                    case, we ditch the incoming segment. */
                                 break;
@@ -1633,7 +1633,7 @@ static void tcp_receive(struct tcp_pcb *pcb, tcp_in_data *in_data)
 #endif /* TCP_QUEUE_OOSEQ */
             }
         } else {
-            /* The incoming segment is not withing the window. */
+            /* The incoming segment is not within the window. */
             tcp_send_empty_ack(pcb);
         }
     } else {

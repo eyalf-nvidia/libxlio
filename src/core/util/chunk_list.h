@@ -12,7 +12,7 @@
 
 #define CHUNK_LIST_CONTAINER_SIZE      64 // Amount of T elements of each container.
 #define CHUNK_LIST_CONTAINER_INIT      4 // Initial number of containers.
-#define CHUNK_LIST_CONTIANER_THRESHOLD 15 // Maximum number of containers before free.
+#define CHUNK_LIST_CONTAINER_THRESHOLD 15 // Maximum number of containers before free.
 
 #define clist_logfunc(log_fmt, log_args...)                                                        \
     vlog_printf(VLOG_FUNC, "clist[%p]:%d:%s() " log_fmt "\n", this, __LINE__, __FUNCTION__,        \
@@ -146,7 +146,7 @@ public:
         if (unlikely(++m_front == CHUNK_LIST_CONTAINER_SIZE)) {
             m_front = 0;
             container *cont = m_used_containers.get_and_pop_front();
-            unlikely(m_free_containers.size() > CHUNK_LIST_CONTIANER_THRESHOLD)
+            unlikely(m_free_containers.size() > CHUNK_LIST_CONTAINER_THRESHOLD)
                 ? delete (cont)
                 : m_free_containers.push_back(cont);
         }

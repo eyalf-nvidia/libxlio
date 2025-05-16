@@ -62,7 +62,7 @@ typedef enum { e_totals = 1, e_deltas } print_details_mode_t;
 
 typedef enum { e_basic = 1, e_medium, e_full, e_mc_groups, e_netstat_like } view_mode_t;
 
-typedef enum { e_by_pid_str, e_by_app_name, e_by_runn_proccess } proc_ident_mode_t;
+typedef enum { e_by_pid_str, e_by_app_name, e_by_run_process } proc_ident_mode_t;
 
 struct user_params_t {
     bool forbid_cleaning;

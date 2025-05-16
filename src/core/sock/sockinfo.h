@@ -271,7 +271,7 @@ public:
     virtual int accept(struct sockaddr *__addr, socklen_t *__addrlen) = 0;
     virtual int accept4(struct sockaddr *__addr, socklen_t *__addrlen, int __flags) = 0;
     virtual int bind(const sockaddr *__addr, socklen_t __addrlen) = 0;
-    virtual int connect(const sockaddr *__to, socklen_t __tolen) = 0;
+    virtual int connect(const sockaddr *__to, socklen_t __token) = 0;
     virtual int getsockname(sockaddr *__name, socklen_t *__namelen) = 0;
     virtual int getpeername(sockaddr *__name, socklen_t *__namelen) = 0;
     virtual int setsockopt(int __level, int __optname, __const void *__optval,
@@ -298,7 +298,7 @@ public:
     virtual void set_immediate_os_sample() = 0;
     virtual void unset_immediate_os_sample() = 0;
 
-    // In some cases we need the socket can't be deleted immidiatly
+    // In some cases we need the socket can't be deleted immediately
     //(for example STREAME sockets)
     // This prepares the socket for termination and return true if the
     // Return val: true is the socket is already closable and false otherwise
@@ -344,7 +344,7 @@ public:
 
     // Calling OS transmit
     ssize_t tx_os(const tx_call_t call_type, const iovec *p_iov, const ssize_t sz_iov,
-                  const int __flags, const sockaddr *__to, const socklen_t __tolen);
+                  const int __flags, const sockaddr *__to, const socklen_t __token);
 
 #if defined(DEFINED_NGINX) || defined(DEFINED_ENVOY)
     // This socket options copy is currently implemented for nginx and for very specific options.
@@ -770,7 +770,7 @@ void sockinfo::reuse_buffer(mem_buf_desc_t *buff)
             m_rx_reuse_buf_postponed = true;
         }
     } else {
-        // Retuned buffer to global pool when owner can't be found
+        // Returned buffer to global pool when owner can't be found
         // In case ring was deleted while buffers where still queued
         vlog_printf(VLOG_DEBUG, "Buffer owner not found\n");
         // Awareness: these are best efforts: decRef without lock in case no CQ

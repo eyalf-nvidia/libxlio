@@ -23,7 +23,7 @@ bool rfs_rule::create(dpcp::match_params &match_value, dpcp::match_params &match
                       dpcp::tir &in_tir, uint16_t priority, uint32_t flow_tag,
                       dpcp::adapter &in_adapter)
 {
-    rfs_logdbg("Creating flow dpcp_adpater::create_flow_rule(), priority %" PRIu16
+    rfs_logdbg("Creating flow dpcp_adapter::create_flow_rule(), priority %" PRIu16
                ", flow_tag: %" PRIu32,
                priority, flow_tag);
     rfs_logdbg("match_mask:\n"
@@ -58,12 +58,12 @@ bool rfs_rule::create(dpcp::match_params &match_value, dpcp::match_params &match
     dpcp::flow_rule *new_rule = nullptr;
     dpcp::status status_out = in_adapter.create_flow_rule(priority, match_mask, new_rule);
     if (status_out != dpcp::DPCP_OK) {
-        rfs_logerr("Failed dpcp_adpater::create_flow_rule(), Priority %" PRIu16 ", Status: %d",
+        rfs_logerr("Failed dpcp_adapter::create_flow_rule(), Priority %" PRIu16 ", Status: %d",
                    priority, static_cast<int>(status_out));
         return false;
     }
 
-    rfs_logdbg("Succeeded dpcp_adpater::create_flow_rule(), Priority %" PRIu16
+    rfs_logdbg("Succeeded dpcp_adapter::create_flow_rule(), Priority %" PRIu16
                ", rfs_rule %p, dpcp_flow: %p",
                priority, this, new_rule);
 
@@ -89,7 +89,7 @@ bool rfs_rule::create(dpcp::match_params &match_value, dpcp::match_params &match
                new_rule);
 
     if (flow_tag) {
-        rfs_logdbg("Setting flow tag dpcp_adpater::set_flow_id(), Tag: %" PRIu32 ", dpcp_flow: %p",
+        rfs_logdbg("Setting flow tag dpcp_adapter::set_flow_id(), Tag: %" PRIu32 ", dpcp_flow: %p",
                    flow_tag, new_rule);
 
         status_out = _dpcp_flow->set_flow_id(flow_tag);

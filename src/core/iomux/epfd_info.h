@@ -30,8 +30,8 @@ public:
 
     /**
      * Get the offloaded fds array and its length.
-     * @param adress of the pointer to number of offloaded fds.
-     * @param adress of the offloaded fds array.
+     * @param address of the pointer to number of offloaded fds.
+     * @param address of the offloaded fds array.
      */
     void get_offloaded_fds_arr_and_size(int **p_p_num_offloaded_fds, int **p_p_offloadded_fds);
 

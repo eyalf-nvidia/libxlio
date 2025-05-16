@@ -416,7 +416,7 @@ protected:
         mrs.reserve(pdus.size());
         for (const auto &pdu : pdus) {
             auto buf = create_tmp_buffer(pdu.iov_len);
-            ASSERT_NE(nullptr, buf) << "Valid test buffer reguired";
+            ASSERT_NE(nullptr, buf) << "Valid test buffer required";
             memcpy(buf, pdu.iov_base, pdu.iov_len);
             auto pd = reinterpret_cast<ibv_pd *>(pd_attr.ib_pd);
             auto reg_mr = ibv_reg_mr(pd, buf, pdu.iov_len, IBV_ACCESS_LOCAL_WRITE);

@@ -293,7 +293,7 @@ private:
 struct mce_sys_var {
     static mce_sys_var &instance()
     {
-        static mce_sys_var the_instance; // singelton
+        static mce_sys_var the_instance; // singleton
         return the_instance;
     }
 
@@ -307,7 +307,7 @@ public:
     void update_multi_process_params();
 
     char *app_name;
-    char app_id[MAX_APP_ID_LENGHT];
+    char app_id[MAX_APP_ID_LENGTH];
 
     uint32_t mce_spec;
 
@@ -361,7 +361,7 @@ public:
     uint32_t rx_prefetch_bytes;
     uint32_t rx_prefetch_bytes_before_poll;
     uint32_t rx_cq_drain_rate_nsec; // If enabled this will cause the Rx to drain all wce in CQ
-                                    // before returning to user, Else (Default: Disbaled) it will
+                                    // before returning to user, Else (Default: Disabled) it will
                                     // return when first ready packet is in socket queue
     uint32_t rx_delta_tsc_between_cq_polls;
 

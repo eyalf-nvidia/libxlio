@@ -449,7 +449,7 @@ unsigned short compute_udp_checksum_rx(const struct ip6_hdr *ip_hdr, const struc
 
 /**
  * Copy iovec to buffer
- * Returns total bytes copyed
+ * Returns total bytes copied
  */
 int memcpy_fromiovec(u_int8_t *p_dst, const struct iovec *p_iov, size_t sz_iov,
                      size_t sz_src_start_offset, size_t sz_data)
@@ -887,7 +887,7 @@ size_t get_vlan_base_name_from_ifname(const char *ifname, char *base_ifname, siz
     return 0;
 }
 
-int run_and_retreive_system_command(const char *cmd_line, char *return_str, int return_str_len)
+int run_and_retrieve_system_command(const char *cmd_line, char *return_str, int return_str_len)
 {
     // TODO: NOTICE the current code will change the environment for all threads of our process
 

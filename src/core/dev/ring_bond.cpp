@@ -500,7 +500,7 @@ int ring_bond::poll_and_process_element_tx(uint64_t *p_cq_poll_sn)
     }
 }
 
-int ring_bond::drain_and_proccess()
+int ring_bond::drain_and_process()
 {
     if (m_lock_ring_rx.trylock()) {
         errno = EAGAIN;
@@ -512,7 +512,7 @@ int ring_bond::drain_and_proccess()
 
     for (uint32_t i = 0; i < m_recv_rings.size(); i++) {
         if (m_recv_rings[i]->is_up()) {
-            temp = m_recv_rings[i]->drain_and_proccess();
+            temp = m_recv_rings[i]->drain_and_process();
             if (temp > 0) {
                 ret += temp;
             }

@@ -158,7 +158,7 @@ void get_orig_funcs()
 }
 #endif /* XLIO_STATIC_BUILD */
 
-#define VERIFY_PASSTROUGH_CHANGED(__ret, __func_and_params__)                                      \
+#define VERIFY_PASSTHROUGH_CHANGED(__ret, __func_and_params__)                                      \
     do {                                                                                           \
         bool passthrough = p_socket_object->isPassthrough();                                       \
         __ret = __func_and_params__;                                                               \
@@ -1003,7 +1003,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(bind)(int __fd, const struct sockaddr *__addr, soc
 
    This function is a cancellation point and therefore not marked with
    __THROW.  */
-EXPORT_SYMBOL int XLIO_SYMBOL(connect)(int __fd, const struct sockaddr *__to, socklen_t __tolen)
+EXPORT_SYMBOL int XLIO_SYMBOL(connect)(int __fd, const struct sockaddr *__to, socklen_t __token)
 {
     int errno_tmp = errno;
 
@@ -1011,22 +1011,22 @@ EXPORT_SYMBOL int XLIO_SYMBOL(connect)(int __fd, const struct sockaddr *__to, so
 
     char buf[256];
     NOT_IN_USE(buf); /* to suppress warning in case MAX_DEFINED_LOG_LEVEL */
-    srdr_logdbg_entry("fd=%d, %s", __fd, sprintf_sockaddr(buf, 256, __to, __tolen));
+    srdr_logdbg_entry("fd=%d, %s", __fd, sprintf_sockaddr(buf, 256, __to, __token));
 
     int ret = 0;
     sockinfo *p_socket_object = fd_collection_get_sockfd(__fd);
     if (!p_socket_object) {
         srdr_logdbg_exit("Unable to get sock_fd_api");
-        ret = SYSCALL(connect, __fd, __to, __tolen);
+        ret = SYSCALL(connect, __fd, __to, __token);
     } else if (!__to || (get_sa_family(__to) != AF_INET && (get_sa_family(__to) != AF_INET6))) {
         p_socket_object->setPassthrough();
-        ret = SYSCALL(connect, __fd, __to, __tolen);
+        ret = SYSCALL(connect, __fd, __to, __token);
     } else {
-        ret = p_socket_object->connect(__to, __tolen);
+        ret = p_socket_object->connect(__to, __token);
         if (p_socket_object->isPassthrough()) {
             handle_close(__fd, false, true);
             if (ret) {
-                ret = SYSCALL(connect, __fd, __to, __tolen);
+                ret = SYSCALL(connect, __fd, __to, __token);
             }
         }
     }
@@ -1061,7 +1061,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(setsockopt)(int __fd, int __level, int __optname,
 
     p_socket_object = fd_collection_get_sockfd(__fd);
     if (p_socket_object) {
-        VERIFY_PASSTROUGH_CHANGED(
+        VERIFY_PASSTHROUGH_CHANGED(
             ret, p_socket_object->setsockopt(__level, __optname, __optval, __optlen));
     } else {
         ret = SYSCALL(setsockopt, __fd, __level, __optname, __optval, __optlen);
@@ -1098,7 +1098,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(getsockopt)(int __fd, int __level, int __optname, 
     sockinfo *p_socket_object = nullptr;
     p_socket_object = fd_collection_get_sockfd(__fd);
     if (p_socket_object) {
-        VERIFY_PASSTROUGH_CHANGED(
+        VERIFY_PASSTHROUGH_CHANGED(
             ret, p_socket_object->getsockopt(__level, __optname, __optval, __optlen));
     } else {
         ret = SYSCALL(getsockopt, __fd, __level, __optname, __optval, __optlen);
@@ -1138,7 +1138,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(fcntl)(int __fd, int __cmd, ...)
     sockinfo *p_socket_object = nullptr;
     p_socket_object = fd_collection_get_sockfd(__fd);
     if (p_socket_object) {
-        VERIFY_PASSTROUGH_CHANGED(res, p_socket_object->fcntl(__cmd, arg));
+        VERIFY_PASSTHROUGH_CHANGED(res, p_socket_object->fcntl(__cmd, arg));
     } else {
         res = SYSCALL(fcntl, __fd, __cmd, arg);
     }
@@ -1182,7 +1182,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(fcntl64)(int __fd, int __cmd, ...)
     sockinfo *p_socket_object = nullptr;
     p_socket_object = fd_collection_get_sockfd(__fd);
     if (p_socket_object && VALID_SYSCALL(fcntl64)) {
-        VERIFY_PASSTROUGH_CHANGED(res, p_socket_object->fcntl64(__cmd, arg));
+        VERIFY_PASSTHROUGH_CHANGED(res, p_socket_object->fcntl64(__cmd, arg));
     } else {
         res = SYSCALL_ERRNO_UNSUPPORTED(fcntl64, __fd, __cmd, arg);
     }
@@ -1219,7 +1219,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(ioctl)(int __fd, unsigned long int __request, ...)
     sockinfo *p_socket_object = nullptr;
     p_socket_object = fd_collection_get_sockfd(__fd);
     if (p_socket_object && arg) {
-        VERIFY_PASSTROUGH_CHANGED(res, p_socket_object->ioctl(__request, arg));
+        VERIFY_PASSTHROUGH_CHANGED(res, p_socket_object->ioctl(__request, arg));
     } else {
         res = SYSCALL(ioctl, __fd, __request, arg);
     }
@@ -1782,7 +1782,7 @@ EXPORT_SYMBOL int XLIO_SYMBOL(sendmmsg)(int __fd, struct mmsghdr *__mmsghdr, uns
    __THROW.  */
 EXPORT_SYMBOL ssize_t XLIO_SYMBOL(sendto)(int __fd, __const void *__buf, size_t __nbytes,
                                           int __flags, const struct sockaddr *__to,
-                                          socklen_t __tolen)
+                                          socklen_t __token)
 {
     PROFILE_FUNC
 
@@ -1799,7 +1799,7 @@ EXPORT_SYMBOL ssize_t XLIO_SYMBOL(sendto)(int __fd, __const void *__buf, size_t 
         tx_arg.attr.sz_iov = 1;
         tx_arg.attr.flags = __flags;
         tx_arg.attr.addr = (struct sockaddr *)__to;
-        tx_arg.attr.len = __tolen;
+        tx_arg.attr.len = __token;
 
         return p_socket_object->tx(tx_arg);
     }
@@ -1810,7 +1810,7 @@ EXPORT_SYMBOL ssize_t XLIO_SYMBOL(sendto)(int __fd, __const void *__buf, size_t 
         return -1;
     }
 
-    return SYSCALL(sendto, __fd, __buf, __nbytes, __flags, __to, __tolen);
+    return SYSCALL(sendto, __fd, __buf, __nbytes, __flags, __to, __token);
 }
 
 EXPORT_SYMBOL ssize_t XLIO_SYMBOL(sendfile)(int out_fd, int in_fd, off_t *offset, size_t count)

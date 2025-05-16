@@ -46,7 +46,7 @@ static int nl_msg_rcv_cb(struct nl_msg *msg, void *arg)
     nl_logfine("---> nl_msg_rcv_cb");
     NOT_IN_USE(arg);
     g_nl_rcv_arg.msghdr = nlmsg_hdr(msg);
-    // NETLINK MESAGE DEBUG
+    // NETLINK MESSAGE DEBUG
     // nl_msg_dump(msg, stdout);
     nl_logfine("<--- nl_msg_rcv_cb");
     return 0;

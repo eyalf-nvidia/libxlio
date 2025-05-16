@@ -305,7 +305,7 @@ inline bool cq_mgr_rx_strq::strq_cqe_to_mem_buff_desc(struct xlio_mlx5_cqe *cqe,
     return false;
 }
 
-int cq_mgr_rx_strq::drain_and_proccess_helper(mem_buf_desc_t *buff, mem_buf_desc_t *buff_wqe,
+int cq_mgr_rx_strq::drain_and_process_helper(mem_buf_desc_t *buff, mem_buf_desc_t *buff_wqe,
                                               buff_status_e status,
                                               uintptr_t *p_recycle_buffers_last_wr_id)
 {
@@ -323,10 +323,10 @@ int cq_mgr_rx_strq::drain_and_proccess_helper(mem_buf_desc_t *buff, mem_buf_desc
                 m_p_cq_stat->n_rx_pkt_drop++;
                 reclaim_recv_buffer_helper(buff);
             } else {
-                bool procces_now = is_eth_tcp_frame(buff);
+                bool process_now = is_eth_tcp_frame(buff);
 
                 // We process immediately all non udp/ip traffic..
-                if (procces_now) {
+                if (process_now) {
                     buff->rx.is_xlio_thr = true;
                     process_recv_buffer(buff, nullptr);
                 } else { // udp/ip traffic we just put in the cq's rx queue
@@ -343,7 +343,7 @@ int cq_mgr_rx_strq::drain_and_proccess_helper(mem_buf_desc_t *buff, mem_buf_desc
     return ret_total;
 }
 
-int cq_mgr_rx_strq::drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id)
+int cq_mgr_rx_strq::drain_and_process(uintptr_t *p_recycle_buffers_last_wr_id)
 {
     cq_logfuncall("cq contains %d wce in m_rx_queue", m_rx_queue.size());
 
@@ -351,7 +351,7 @@ int cq_mgr_rx_strq::drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id)
     uint32_t ret_total = 0;
     uint64_t cq_poll_sn = 0;
 
-    // drain_and_proccess() is mainly called in following cases as
+    // drain_and_process() is mainly called in following cases as
     // Internal thread:
     //   Frequency of real polling can be controlled by
     //   PROGRESS_ENGINE_INTERVAL and PROGRESS_ENGINE_WCE_MAX.
@@ -370,7 +370,7 @@ int cq_mgr_rx_strq::drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id)
         }
 
         ret_total +=
-            drain_and_proccess_helper(buff, buff_wqe, status, p_recycle_buffers_last_wr_id);
+            drain_and_process_helper(buff, buff_wqe, status, p_recycle_buffers_last_wr_id);
     }
 
     update_global_sn_rx(cq_poll_sn, ret_total);

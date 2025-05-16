@@ -57,7 +57,7 @@ if [ ! -z "${test_remote_ip}" ] ; then
 	rmt_user=root
 
 	rmt_os=$(${sudo_cmd} ssh ${rmt_user}@${test_remote_ip} ". /etc/os-release ; echo \${NAME,,} | awk '{print \$1}'")
-	[ ! -z "${test_remote_rebuild}" ] && rmt_os="rebuld"
+	[ ! -z "${test_remote_rebuild}" ] && rmt_os="rebuild"
 	local_os=$(. /etc/os-release ; echo ${NAME,,} | awk '{print $1}')
 
 	#skip_remote_prep=1

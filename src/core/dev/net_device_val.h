@@ -217,7 +217,7 @@ public:
     bool global_ring_poll_and_process_element(uint64_t *p_poll_sn_rx, uint64_t *p_poll_sn_tx,
                                               void *pv_fd_ready_array = NULL);
     int global_ring_request_notification(uint64_t poll_sn_rx, uint64_t poll_sn_tx);
-    int ring_drain_and_proccess();
+    int ring_drain_and_process();
     void ring_adapt_cq_moderation();
     L2_address *get_l2_address() { return m_p_L2_addr; };
     L2_address *get_br_address() { return m_p_br_addr; };

@@ -333,7 +333,7 @@ bool fooBar(bool Baz, char* str, std::vector<int>& Result);
     - Forward declarations can hide a dependency, allowing user code to skip necessary recompilation when headers change.
     - A forward declaration as opposed to an #include statement makes it difficult for automatic tooling to discover the module defining the symbol.
     - A forward declaration may be broken by subsequent changes to the library. Forward declarations of functions and templates can prevent the header owners from making otherwise-compatible changes to their APIs, such as widening a parameter type, adding a template parameter with a default value, or migrating to a new namespace.
-    - Forward declaring multiple symbols from a header can be more verbose than simply #includeing the header.
+    - Forward declaring multiple symbols from a header can be more verbose than simply #including the header.
 
 **Right:**
 ```

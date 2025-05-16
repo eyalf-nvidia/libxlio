@@ -113,7 +113,7 @@ public:
      * 		- if the packet is complete - put the pointer to the first fragment of the packet in
      * ret. Rest of the packet fragments are linked in order.
      * 		- if we need more fragments - put NULL in ret.
-     * -1 if finished with error and this packet needs to be droped
+     * -1 if finished with error and this packet needs to be dropped
      */
     int add_frag(iphdr *hdr, mem_buf_desc_t *frag, mem_buf_desc_t **ret);
     int add_frag(ip6_hdr *hdr, mem_buf_desc_t *frag, mem_buf_desc_t **ret);

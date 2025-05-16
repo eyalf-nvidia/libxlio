@@ -470,7 +470,7 @@ bool UnitTestOptions::MatchesFilter(
       return false;
     }
 
-    // Skips the pattern separater (the ':' character).
+    // Skips the pattern separator (the ':' character).
     cur_pattern++;
   }
 }
@@ -682,14 +682,14 @@ void DefaultPerThreadTestPartResultReporter::ReportTestPartResult(
 TestPartResultReporterInterface*
 UnitTestImpl::GetGlobalTestPartResultReporter() {
   internal::MutexLock lock(&global_test_part_result_reporter_mutex_);
-  return global_test_part_result_repoter_;
+  return global_test_part_result_reporter_;
 }
 
 // Sets the global test part result reporter.
 void UnitTestImpl::SetGlobalTestPartResultReporter(
     TestPartResultReporterInterface* reporter) {
   internal::MutexLock lock(&global_test_part_result_reporter_mutex_);
-  global_test_part_result_repoter_ = reporter;
+  global_test_part_result_reporter_ = reporter;
 }
 
 // Returns the test part result reporter for the current thread.
@@ -1741,7 +1741,7 @@ void TestResult::RecordProperty(const std::string& xml_element,
   if (!ValidateTestProperty(xml_element, test_property)) {
     return;
   }
-  internal::MutexLock lock(&test_properites_mutex_);
+  internal::MutexLock lock(&test_properties_mutex_);
   const std::vector<TestProperty>::iterator property_with_matching_key =
       std::find_if(test_properties_.begin(), test_properties_.end(),
                    internal::TestPropertyKeyIs(test_property.key()));
@@ -4078,7 +4078,7 @@ UnitTestImpl::UnitTestImpl(UnitTest* parent)
       default_global_test_part_result_reporter_(this),
       default_per_thread_test_part_result_reporter_(this),
 #endif  // _MSC_VER
-      global_test_part_result_repoter_(
+      global_test_part_result_reporter_(
           &default_global_test_part_result_reporter_),
       per_thread_test_part_result_reporter_(
           &default_per_thread_test_part_result_reporter_),

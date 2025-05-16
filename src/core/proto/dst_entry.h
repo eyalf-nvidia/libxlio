@@ -183,7 +183,7 @@ protected:
     virtual void init_sge() {};
     ssize_t pass_pkt_to_neigh(const iovec *p_iov, size_t sz_iov, uint32_t packet_id);
     bool alloc_transport_dep_res();
-    bool alloc_neigh_val(transport_type_t tranport);
+    bool alloc_neigh_val(transport_type_t transport);
     bool get_routing_addr_sel_src(ip_address &out_ip) const;
     void do_ring_migration_tx(lock_base &socket_lock, resource_allocation_key &old_key);
     transport_type_t get_obs_transport_type() const;
@@ -191,7 +191,7 @@ protected:
     {
         m_b_tx_mem_buf_desc_list_pending = is_pending;
     }
-    uint32_t get_priority_by_tc_class(uint32_t tc_clas);
+    uint32_t get_priority_by_tc_class(uint32_t tc_class);
     inline void send_ring_buffer(ring_user_id_t id, xlio_ibv_send_wr *p_send_wqe,
                                  xlio_wr_tx_packet_attr attr)
     {

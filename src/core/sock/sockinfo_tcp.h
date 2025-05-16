@@ -605,7 +605,7 @@ private:
     bool m_timer_registered = false;
     /* connection state machine */
     int m_conn_timeout;
-    /* RCVBUF acconting */
+    /* RCVBUF accounting */
     int m_rcvbuff_max;
     int m_rcvbuff_current;
     int m_rcvbuff_non_tcp_recved;
@@ -653,7 +653,7 @@ private:
     peer_map_t m_rx_peer_packets;
     xlio_desc_list_t m_rx_ctl_reuse_list;
     ready_pcb_map_t m_ready_pcbs;
-    static const unsigned TX_CONSECUTIVE_EAGAIN_THREASHOLD = 10;
+    static const unsigned TX_CONSECUTIVE_EAGAIN_THRESHOLD = 10;
     unsigned m_tx_consecutive_eagain_count;
     bool m_sysvar_rx_poll_on_tx_tcp;
     uint64_t m_user_huge_page_mask;

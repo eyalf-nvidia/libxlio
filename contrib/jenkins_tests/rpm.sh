@@ -91,7 +91,7 @@ fi
 
 
 # check if we have email of indevidual users in the packages rpm/deb metadata Maintainer field
-pacakges_location="$rpm_dir"/dist-pkg/packages
+packages_location="$rpm_dir"/dist-pkg/packages
 email_log_file="$rpm_dir"/dist-pkg/email_scan.log
 
 if [ $opt_rpm -eq 1 ]; then
@@ -102,8 +102,8 @@ else
     test_info_exec="apt info"
 fi
 
-# iterate on all packages and extarct the metadata to outout file
-find "$pacakges_location" -type f -name "$search_filter" -exec $test_info_exec {} \; | tee -a "$email_log_file"
+# iterate on all packages and extarct the metadata to output file
+find "$packages_location" -type f -name "$search_filter" -exec $test_info_exec {} \; | tee -a "$email_log_file"
 
 do_archive "$email_log_file"
 

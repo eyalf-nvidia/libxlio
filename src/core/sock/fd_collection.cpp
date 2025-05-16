@@ -449,7 +449,7 @@ int fd_collection::del_sockfd(int fd, bool is_for_udp_pool /*=false*/)
 
     if (p_sfd_api) {
         // TCP socket need some timer to before it can be deleted,
-        // in order to gracefuly terminate TCP connection
+        // in order to gracefully terminate TCP connection
         // so we have to stages:
         // 1. Prepare to close: kikstarts TCP connection termination
         // 2. Socket deletion when TCP connection == CLOSED

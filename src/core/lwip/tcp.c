@@ -565,7 +565,7 @@ err_t tcp_connect(struct tcp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port, bool
     return ret;
 }
 
-static inline bool tcp_user_timeout_occured(struct tcp_pcb *pcb)
+static inline bool tcp_user_timeout_occurred(struct tcp_pcb *pcb)
 {
     u32_t user_timeout_ticks = (pcb->user_timeout_ms + slow_tmr_interval - 1U) / slow_tmr_interval;
 
@@ -605,7 +605,7 @@ void tcp_slowtmr(struct tcp_pcb *pcb)
         LWIP_ASSERT("tcp_slowtmr: active get_tcp_state(pcb) != TIME-WAIT\n",
                     get_tcp_state(pcb) != TIME_WAIT);
 
-        if (tcp_user_timeout_occured(pcb)) {
+        if (tcp_user_timeout_occurred(pcb)) {
             ++pcb_remove;
             err = ERR_TIMEOUT;
             pcb_reset += (pcb->so_options & SOF_KEEPALIVE);
@@ -1125,11 +1125,11 @@ void tcp_sent(struct tcp_pcb *pcb, tcp_sent_fn sent)
 
 /**
  * Used to specify the function that should be called when a fatal error
- * has occured on the connection.
+ * has occurred on the connection.
  *
  * @param pcb tcp_pcb to set the err callback
  * @param err callback function to call for this pcb when a fatal error
- *        has occured on the connection
+ *        has occurred on the connection
  */
 void tcp_err(struct tcp_pcb *pcb, tcp_err_fn err)
 {

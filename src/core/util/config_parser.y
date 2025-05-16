@@ -35,7 +35,7 @@ static int parse_err = 0;
 
 struct dbl_lst	__instance_list;
 
-/* some globals to store intermidiate parser state */
+/* some globals to store intermediate parser state */
 static struct use_family_rule __xlio_rule;
 static struct address_port_rule *__xlio_address_port_rule = NULL;
 static int __xlio_rule_push_head = 0;
@@ -115,7 +115,7 @@ static void  __xlio_dump_rule_config_state() {
 	__xlio_log(1, "%s", buf);
 }
 
-/* dump configuration properites of new instance */
+/* dump configuration properties of new instance */
 static void  __xlio_dump_instance() {
 	char buf[1024];
 

@@ -67,7 +67,7 @@ inline bool is_eth_tcp_frame(mem_buf_desc_t *buff)
     if (likely(h_proto == htons(ETH_P_IPV6))) {
         struct ip6_hdr *p_ip_h = (struct ip6_hdr *)(buff->p_buffer + transport_header_len);
 
-        // For IPv6 we must consider the case that there might be extention headers.
+        // For IPv6 we must consider the case that there might be extension headers.
         // There is no way to determine the L4 protocol without parsing the ext headers.
         // Parsing the headers at this stage is a huge overhead.
         // So for all next_headers that are not TCP or UDP, we consider it as TCP,

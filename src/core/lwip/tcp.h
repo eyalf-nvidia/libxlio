@@ -300,7 +300,7 @@ struct tcp_pcb {
     /* RTT (round trip time) estimation variables */
     u32_t rttest; /* RTT estimate in 10ms ticks */
     u32_t rtseq; /* sequence number being timed */
-    u32_t user_timeout_ms; /* timeout in miliseconds */
+    u32_t user_timeout_ms; /* timeout in milliseconds */
     s32_t ticks_since_data_sent;
 #if TCP_CC_ALGO_MOD
     u32_t t_rttupdated; /* number of RTT estimations taken so far */

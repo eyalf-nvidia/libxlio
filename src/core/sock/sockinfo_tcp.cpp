@@ -771,7 +771,7 @@ bool sockinfo_tcp::prepare_to_close(bool process_shutdown /* = false */)
         reset_ops();
     } else if (!is_listen_socket) {
         // This solution is good for current Nginx case however,
-        // There is still possibility of race in case of multithreded polling.
+        // There is still possibility of race in case of multithreaded polling.
         // Once we unlock this connection there are still two operations that are racebale:
         // 1. In fd_collection::del_sockfd after this method is done.
         // 2. In handle_close when fd_collection::del_sockfd is finished and we remove the
@@ -2063,7 +2063,7 @@ inline void sockinfo_tcp::rx_lwip_process_chained_pbufs(pbuf *p)
         Chain of pbufs can contain some pbufs with ref count >=1 like in ooo or flow tag flows.
         While processing Rx packets we may split buffer chains and we increment ref count
         for the new head of the chain after the split. It will cause a wrong ref count,
-        and the buffer won't be reclaimed. Resetting it here will migitate the issue.
+        and the buffer won't be reclaimed. Resetting it here will mitigate the issue.
         TODO: remove ref count for TCP. */
         p_curr_desc->reset_ref_count();
 
@@ -2075,7 +2075,7 @@ inline void sockinfo_tcp::rx_lwip_process_chained_pbufs(pbuf *p)
         p_curr_desc->p_next_desc = reinterpret_cast<mem_buf_desc_t *>(p->next);
     }
 
-    // To avoid redundant checking for every packet a seperate loop runs
+    // To avoid redundant checking for every packet a separate loop runs
     // only in case timestamps are needed.
     if (m_b_rcvtstamp || m_n_tsing_flags) {
         for (auto *p_curr_desc = p_first_desc; p_curr_desc;
@@ -2111,16 +2111,16 @@ inline void sockinfo_tcp::rx_lwip_shrink_rcv_wnd(size_t pbuf_tot_len, int bytes_
         tcp_recved(&(m_pcb), bytes_received);
     }
 
-    int non_tcp_receved_bytes_remaining = pbuf_tot_len - bytes_received;
+    int non_tcp_received_bytes_remaining = pbuf_tot_len - bytes_received;
 
-    if (non_tcp_receved_bytes_remaining > 0) {
+    if (non_tcp_received_bytes_remaining > 0) {
         uint32_t bytes_to_shrink = 0;
         if (m_pcb.rcv_wnd_max > m_pcb.rcv_wnd_max_desired) {
             bytes_to_shrink = std::min(m_pcb.rcv_wnd_max - m_pcb.rcv_wnd_max_desired,
-                                       static_cast<uint32_t>(non_tcp_receved_bytes_remaining));
+                                       static_cast<uint32_t>(non_tcp_received_bytes_remaining));
             m_pcb.rcv_wnd_max -= bytes_to_shrink;
         }
-        m_rcvbuff_non_tcp_recved += non_tcp_receved_bytes_remaining - bytes_to_shrink;
+        m_rcvbuff_non_tcp_recved += non_tcp_received_bytes_remaining - bytes_to_shrink;
     }
 }
 
@@ -2610,7 +2610,7 @@ void sockinfo_tcp::passthrough_unlock(const char *dbg)
  *  try to connect to the dest over RDMA cm
  *  try fallback to the OS connect (TODO)
  */
-int sockinfo_tcp::connect(const sockaddr *__to, socklen_t __tolen)
+int sockinfo_tcp::connect(const sockaddr *__to, socklen_t __token)
 {
     int ret = 0;
 
@@ -2658,7 +2658,7 @@ int sockinfo_tcp::connect(const sockaddr *__to, socklen_t __tolen)
         return -1;
     }
 
-    m_connected.set_sockaddr(__to, __tolen);
+    m_connected.set_sockaddr(__to, __token);
     if (m_sock_state == TCP_SOCK_BOUND_NO_PORT) {
         if (bind(m_bound.get_p_sa(), m_bound.get_socklen()) == -1) {
             m_connected.clear_sa();
@@ -3033,7 +3033,7 @@ int sockinfo_tcp::listen(int backlog)
     // sockets
     if (SYSCALL(listen, m_fd, orig_backlog)) {
         // NOTE: The attach_as_uc_receiver at this stage already created steering rules.
-        // Packets may arrive into the queues and the application may theoreticaly
+        // Packets may arrive into the queues and the application may theoretically
         // call accept() with success.
         si_tcp_logdbg("orig_listen failed");
         unlock_tcp_con();
@@ -3826,7 +3826,7 @@ int sockinfo_tcp::wait_for_conn_ready_blocking()
         if (rx_wait(poll_count, true) < 0) {
             si_tcp_logdbg("connect interrupted");
 
-            // Internally rx_wait uses epoll_wait wich may return unrecoverable error.
+            // Internally rx_wait uses epoll_wait which may return unrecoverable error.
             // However, we do not want to expose internal errors due to epoll usage to the
             // outside. Consequently, since this method is used by blocking connect, we rewrite
             // the errno with one that is compatible with connect() API.
@@ -4092,7 +4092,7 @@ int sockinfo_tcp::shutdown(int __how)
         break;
         BULLSEYE_EXCLUDE_BLOCK_START
     default:
-        si_tcp_logerr("unknow shutdown option %d", __how);
+        si_tcp_logerr("unknown shutdown option %d", __how);
         break;
         BULLSEYE_EXCLUDE_BLOCK_END
     }
@@ -5094,7 +5094,7 @@ int sockinfo_tcp::rx_wait_helper(int &poll_count, bool blocking)
     // We need to consider what to do in case poll_and_process_element_rx fails on try_lock.
     // It can be too expansive for the application to get nothing just because of lock contention.
     // In this case it will be better to have a lock() version of poll_and_process_element_rx.
-    // And then we should continue polling untill we have ready packets or we drained the CQ.
+    // And then we should continue polling until we have ready packets or we drained the CQ.
     bool all_drained = true;
     if (likely(m_p_rx_ring)) {
         all_drained = m_p_rx_ring->poll_and_process_element_rx(&poll_sn);
@@ -5883,7 +5883,7 @@ struct tcp_seg *sockinfo_tcp::get_tcp_seg_cached()
 // Assumed seg != nullptr
 void sockinfo_tcp::put_tcp_seg_direct(struct tcp_seg *seg)
 {
-    seg->next = nullptr; // Very important. We occasionaly get here trashed seg->next.
+    seg->next = nullptr; // Very important. We occasionally get here trashed seg->next.
     return_tcp_segs(seg);
 }
 
@@ -5971,14 +5971,14 @@ void tcp_timers_collection::handle_timer_expired(void *user_data)
     auto iter = bucket.begin();
     while (iter != bucket.end()) {
         sockinfo_tcp *p_sock = *iter;
-        // Must inc iter first bacause handle_timer_expired can erase
+        // Must inc iter first because handle_timer_expired can erase
         // the socket that the iter points to, with delegated timers.
         iter++;
 
         /* It is not guaranteed that the same sockinfo object is met once
          * in this loop.
          * So in case sockinfo object is destroyed other processing
-         * of the same object mast be ingored.
+         * of the same object mast be ignored.
          * TODO Check on is_cleaned() is not safe completely.
          */
         if (!p_sock->trylock_tcp_con()) {
@@ -6340,7 +6340,7 @@ ssize_t sockinfo_tcp::tcp_tx_handle_sndbuf_unavailable(ssize_t total_tx, bool is
                                              is_send_zerocopy);
     } else {
         m_tx_consecutive_eagain_count++;
-        if (m_tx_consecutive_eagain_count >= TX_CONSECUTIVE_EAGAIN_THREASHOLD) {
+        if (m_tx_consecutive_eagain_count >= TX_CONSECUTIVE_EAGAIN_THRESHOLD) {
             if (safe_mce_sys().tcp_ctl_thread ==
                 option_tcp_ctl_thread::CTL_THREAD_DELEGATE_TCP_TIMERS) {
                 // Slow path. We must attempt TCP timers here for applications that

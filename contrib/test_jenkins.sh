@@ -59,12 +59,12 @@ echo
 #
 jenkins_opt_artifacts=${jenkins_opt_artifacts:="always"}
 
-# Stop verification after number of erros
+# Stop verification after number of errors
 # Values: 0..N test (max 100)
 #
 jenkins_opt_exit=${jenkins_opt_exit:="6"}
 
-# Style format behaivour (check, fix)
+# Style format behaviour (check, fix)
 # Values: no, yes
 #
 jenkins_opt_style_force=${jenkins_opt_style_force:="no"}

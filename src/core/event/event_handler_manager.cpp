@@ -900,10 +900,10 @@ void event_handler_manager::process_rdma_cm_event(event_handler_map_t::iterator 
 
 /*
 The main loop actions:
-    1) update timeout + handle registers that theire timeout expiered
+    1) update timeout + handle registers that their timeout expired
     2) epoll_wait
     3) handle new registrations/unregistrations
-    4) update timeout + handle registers that theire timeout expiered
+    4) update timeout + handle registers that their timeout expired
     5) handle new events
 */
 
@@ -1048,7 +1048,7 @@ void *event_handler_manager::thread_loop()
                 break;
                 BULLSEYE_EXCLUDE_BLOCK_START
             default:
-                evh_logerr("Unknow event on fd=%d", fd);
+                evh_logerr("Unknown event on fd=%d", fd);
                 BULLSEYE_EXCLUDE_BLOCK_END
             }
         } // for idx

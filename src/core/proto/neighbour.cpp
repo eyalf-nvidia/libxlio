@@ -700,7 +700,7 @@ bool neigh_entry::post_send_tcp(neigh_send_data *p_data)
     m_p_ring->send_ring_buffer(m_id, &m_send_wqe, attr);
 #ifndef __COVERITY__
     struct tcphdr *p_tcp_h = reinterpret_cast<tcphdr *>(p_tcp_hdr);
-    NOT_IN_USE(p_tcp_h); /* to supress warning in case MAX_DEFINED_LOG_LEVEL */
+    NOT_IN_USE(p_tcp_h); /* to suppress warning in case MAX_DEFINED_LOG_LEVEL */
     neigh_logdbg("Tx TCP segment info: src_port=%d, dst_port=%d, flags='%s%s%s%s%s%s' seq=%u, "
                  "ack=%u, win=%u, payload_sz=%u",
                  ntohs(p_tcp_h->source), ntohs(p_tcp_h->dest), p_tcp_h->urg ? "U" : "",
@@ -888,7 +888,7 @@ const char *neigh_entry::event_to_str(event_t event) const
     case EV_TIMEOUT_EXPIRED:
         return "EV_TIMEOUT_EXPIRED";
     case EV_UNHANDLED:
-        return "EV_UNHANDELED";
+        return "EV_UNHANDLED";
         BULLSEYE_EXCLUDE_BLOCK_START
     default:
         return "Undefined";
@@ -1082,7 +1082,7 @@ void neigh_entry::dofunc_enter_ready(const sm_info_t &func_info)
 
 void neigh_entry::priv_general_st_entry(const sm_info_t &func_info)
 {
-    NOT_IN_USE(func_info); /* to supress warning in case MAX_DEFINED_LOG_LEVEL */
+    NOT_IN_USE(func_info); /* to suppress warning in case MAX_DEFINED_LOG_LEVEL */
     neigh_logdbg("State change: %s (%d) => %s (%d) with event %s (%d)",
                  state_to_str((state_t)func_info.old_state), func_info.old_state,
                  state_to_str((state_t)func_info.new_state), func_info.new_state,
@@ -1096,8 +1096,8 @@ void neigh_entry::priv_general_st_leave(const sm_info_t &func_info)
 
 void neigh_entry::priv_print_event_info(state_t state, event_t event)
 {
-    NOT_IN_USE(state); /* to supress warning in case MAX_DEFINED_LOG_LEVEL */
-    NOT_IN_USE(event); /* to supress warning in case MAX_DEFINED_LOG_LEVEL */
+    NOT_IN_USE(state); /* to suppress warning in case MAX_DEFINED_LOG_LEVEL */
+    NOT_IN_USE(event); /* to suppress warning in case MAX_DEFINED_LOG_LEVEL */
     neigh_logdbg("Got event '%s' (%d) in state '%s' (%d)", event_to_str(event), event,
                  state_to_str(state), state);
 }
@@ -1207,7 +1207,7 @@ void neigh_entry::priv_enter_not_active()
 
     priv_destroy_cma_id();
     priv_unregister_timer();
-    m_is_first_send_arp = true; // force send boardcast next cycle
+    m_is_first_send_arp = true; // force send broadcast next cycle
     m_arp_counter = 0;
 
     // Flush unsent_queue in case that neigh entry is in error state
@@ -1241,7 +1241,7 @@ void neigh_entry::priv_enter_error()
 
     priv_destroy_cma_id();
     priv_unregister_timer();
-    m_is_first_send_arp = true; // force send boardcast next cycle
+    m_is_first_send_arp = true; // force send broadcast next cycle
     m_arp_counter = 0;
 
     if (m_val) {
@@ -1280,7 +1280,7 @@ int neigh_entry::priv_enter_ready()
     int state = 0;
     // Need to send ARP in case neigh state is not REACHABLE and this is not MC neigh
     // This is the case when XLIO was started with neigh in STALE state and
-    // rdma_adress_resolve() in this case will not initiate ARP
+    // rdma_address_resolve() in this case will not initiate ARP
     if (m_type == UC && !m_is_loopback) {
         if (priv_get_neigh_state(state) && !priv_is_reachable(state)) {
             send_discovery_request();

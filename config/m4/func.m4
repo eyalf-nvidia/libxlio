@@ -38,7 +38,7 @@ EOF
 
 ])
 
-# FUNC_CHECK_WITHDIR(name, direcory, file)
+# FUNC_CHECK_WITHDIR(name, directory, file)
 # ----------------------------------------------------
 AC_DEFUN([FUNC_CHECK_WITHDIR],[
     AC_MSG_CHECKING([for $1 location])

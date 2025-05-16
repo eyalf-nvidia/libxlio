@@ -496,9 +496,9 @@ int sockinfo_udp::bind(const struct sockaddr *__addr, socklen_t __addrlen)
     return bind_no_os();
 }
 
-int sockinfo_udp::connect(const struct sockaddr *__to, socklen_t __tolen)
+int sockinfo_udp::connect(const struct sockaddr *__to, socklen_t __token)
 {
-    sock_addr connect_to(__to, __tolen);
+    sock_addr connect_to(__to, __token);
     si_udp_logdbg("to %s", connect_to.to_str_ip_port(true).c_str());
     validate_and_convert_mapped_ipv4(connect_to);
 
@@ -514,7 +514,7 @@ int sockinfo_udp::connect(const struct sockaddr *__to, socklen_t __tolen)
 
     // We always call the orig_connect which will check sanity of the user socket api
     // and the OS will also allocate a specific bound port that we can also use
-    int ret = SYSCALL(connect, m_fd, __to, __tolen);
+    int ret = SYSCALL(connect, m_fd, __to, __token);
     if (ret) {
         si_udp_logdbg("orig connect failed (ret=%d, errno=%d %m)", ret, errno);
         return ret;
@@ -935,7 +935,7 @@ int sockinfo_udp::setsockopt(int __level, int __optname, __const void *__optval,
                 memcpy(&mreqn.imr_address, __optval, sizeof(struct in_addr));
             }
 
-            // The aplication may pass here ip-address or an interface index.
+            // The application may pass here ip-address or an interface index.
             // If ip-address is passed we suppose that this is the source IP without
             // even any checks that this IP exists.
             // If index is passed we take the first IPv4 address of the interface.
@@ -1129,7 +1129,7 @@ int sockinfo_udp::setsockopt(int __level, int __optname, __const void *__optval,
             if (TRANS_OS ==
                 __xlio_match_udp_receiver(TRANS_XLIO, safe_mce_sys().app_id,
                                           tmp_grp_addr.get_p_sa(), tmp_grp_addr.get_socklen())) {
-                // call orig setsockopt() and don't try to offlaod
+                // call orig setsockopt() and don't try to offload
                 si_udp_logdbg(
                     "setsockopt(%s) will be passed to OS for handling due to rule matching",
                     setsockopt_ip_opt_to_str(__optname));
@@ -1137,7 +1137,7 @@ int sockinfo_udp::setsockopt(int __level, int __optname, __const void *__optval,
             }
             // Check if local_if is not offloadable
             else if (!g_p_net_device_table_mgr->get_net_device_val(ip_addr(mc_if))) {
-                // call orig setsockopt() and don't try to offlaod
+                // call orig setsockopt() and don't try to offload
                 si_udp_logdbg("setsockopt(%s) will be passed to OS for handling - not offload "
                               "interface (%s)",
                               setsockopt_ip_opt_to_str(__optname),
@@ -1155,7 +1155,7 @@ int sockinfo_udp::setsockopt(int __level, int __optname, __const void *__optval,
             }
             // Handle attach to this MC group now
             else if (mc_change_membership_ip4(&mcpram)) {
-                // Opps, failed in attaching??? call orig setsockopt()
+                // Oops, failed in attaching??? call orig setsockopt()
                 goto_os = true;
             }
 
@@ -1467,7 +1467,7 @@ int sockinfo_udp::multicast_membership_setsockopt_ip6(int optname, const void *o
 
     // Check if local_if is offloaded
     if (!g_p_net_device_table_mgr->get_net_device_val(ip_addr(mcpram.mc_if, m_family))) {
-        // call orig setsockopt() and don't try to offlaod
+        // call orig setsockopt() and don't try to offload
         si_udp_logdbg("Not offloaded interface (%s)", mcpram.mc_if.to_str(m_family).c_str());
         goto_os = true;
     }
@@ -1484,7 +1484,7 @@ int sockinfo_udp::multicast_membership_setsockopt_ip6(int optname, const void *o
 
     // Handle attach to this MC group now
     else if (mc_change_membership_ip6(&mcpram)) {
-        // Opps, failed in attaching??? call orig setsockopt()
+        // Oops, failed in attaching??? call orig setsockopt()
         goto_os = true;
     }
 
@@ -2563,7 +2563,7 @@ void sockinfo_udp::set_blocking(bool is_blocked)
 
     if (m_b_blocking) {
         // Set the high CQ polling RX_POLL value
-        // depending on where we have mapped offloaded MC gorups
+        // depending on where we have mapped offloaded MC groups
         if (m_rx_ring_map.size() > 0) {
             m_loops_to_go = safe_mce_sys().rx_poll_num;
         } else {
@@ -2745,7 +2745,7 @@ int sockinfo_udp::mc_change_membership_ip4(const mc_pending_pram *p_mc_pram)
 
     // Check if local_if is offloadable
     if (!g_p_net_device_table_mgr->get_net_device_val(ip_addr(mc_if, AF_INET))) {
-        // Break so we call orig setsockopt() and try to offlaod
+        // Break so we call orig setsockopt() and try to offload
         si_udp_logdbg(
             "setsockopt(%s) will be passed to OS for handling - not offload interface (%s)",
             setsockopt_ip_opt_to_str(p_mc_pram->optname), mc_if.to_str(AF_INET).c_str());
@@ -3012,7 +3012,7 @@ int sockinfo_udp::mc_change_membership_ip6(const mc_pending_pram *p_mc_pram)
     case IPV6_JOIN_GROUP:
     case MCAST_JOIN_GROUP:
     case MCAST_JOIN_SOURCE_GROUP: {
-        // TODO: fix bug - cant join 2 times for the same group iwth different sources
+        // TODO: fix bug - cant join 2 times for the same group with different sources
         // attach will fail. should be like:
         // attach_receiver only if its the first time for the mc_grp
         // if (m_mc_memberships_map.find(mc_grp) == m_mc_memberships_map.end()) {

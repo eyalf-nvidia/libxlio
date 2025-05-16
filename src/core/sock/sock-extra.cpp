@@ -514,12 +514,12 @@ extern "C" int xlio_socket_bind(xlio_socket_t sock, const struct sockaddr *addr,
     return rc;
 }
 
-extern "C" int xlio_socket_connect(xlio_socket_t sock, const struct sockaddr *to, socklen_t tolen)
+extern "C" int xlio_socket_connect(xlio_socket_t sock, const struct sockaddr *to, socklen_t token)
 {
     sockinfo_tcp *si = reinterpret_cast<sockinfo_tcp *>(sock);
     int errno_save = errno;
 
-    int rc = si->connect(to, tolen);
+    int rc = si->connect(to, token);
     rc = (rc == -1 && (errno == EINPROGRESS || errno == EAGAIN)) ? 0 : rc;
     if (rc == 0) {
         si->add_tx_ring_to_group();

@@ -27,7 +27,7 @@ TEST_F(tcp_accept, mapped_ipv4_accept)
         return;
     }
 
-    auto check_accpet = [this](bool api4) {
+    auto check_accept = [this](bool api4) {
         int pid = fork();
 
         if (0 == pid) { // Child
@@ -117,7 +117,7 @@ TEST_F(tcp_accept, mapped_ipv4_accept)
     };
 
     log_trace("Checking accept()\n");
-    check_accpet(false);
+    check_accept(false);
     log_trace("Checking accept4()\n");
-    check_accpet(true);
+    check_accept(true);
 }

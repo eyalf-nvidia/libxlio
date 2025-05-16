@@ -191,7 +191,7 @@ public:
 
     // The ip_address is assumed to store Big-Endian. However performing ntohll frequently
     // may impact performance in some flows. For cases like map/hash where
-    // the real order is insignificant, this methods performs comparision without ntohll.
+    // the real order is insignificant, this methods performs comparison without ntohll.
     bool less_than_raw(const ip_address &other) const
     {
         return (likely(m_ip6_64[0] != other.m_ip6_64[0]) ? (m_ip6_64[0] < other.m_ip6_64[0])

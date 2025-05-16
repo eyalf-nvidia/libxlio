@@ -13,7 +13,7 @@
  * @class event_handler
  * An object registers with event_handler_manager to get event notification callbacks for the
  * registered rdma_cm id's. This callback function will be called when an event was received on the
- * appropritae channel with the appropritae id. The channels can be shared between several objects,
+ * appropriate channel with the appropriate id. The channels can be shared between several objects,
  * but the id's in each channel has to be unic.
  */
 class event_handler_rdma_cm {

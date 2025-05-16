@@ -64,7 +64,7 @@ private:
     void new_route_event(const route_val &netlink_route_val);
     void del_route_event(const route_val &netlink_route_val);
 
-    // IPv4 routing infromation
+    // IPv4 routing information
     route_table_t m_table_in4;
     // IPv6 routing information
     route_table_t m_table_in6;

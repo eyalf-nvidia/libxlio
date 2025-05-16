@@ -534,10 +534,10 @@ void ring_simple::mem_buf_desc_return_single_locked(mem_buf_desc_t *buff)
     put_tx_buffer_helper(buff);
 }
 
-int ring_simple::drain_and_proccess()
+int ring_simple::drain_and_process()
 {
     int ret = 0;
-    RING_TRY_LOCK_RUN_AND_UPDATE_RET(m_lock_ring_rx, m_p_cq_mgr_rx->drain_and_proccess());
+    RING_TRY_LOCK_RUN_AND_UPDATE_RET(m_lock_ring_rx, m_p_cq_mgr_rx->drain_and_process());
     return ret;
 }
 

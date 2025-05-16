@@ -174,7 +174,7 @@ void cq_mgr_rx_regrq::cqe_to_mem_buff_desc(struct xlio_mlx5_cqe *cqe,
     }
 }
 
-int cq_mgr_rx_regrq::drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id /*=NULL*/)
+int cq_mgr_rx_regrq::drain_and_process(uintptr_t *p_recycle_buffers_last_wr_id /*=NULL*/)
 {
     cq_logfuncall("cq contains %d wce in m_rx_queue", m_rx_queue.size());
 
@@ -182,7 +182,7 @@ int cq_mgr_rx_regrq::drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id 
     uint32_t ret_total = 0;
     uint64_t cq_poll_sn = 0;
 
-    /* drain_and_proccess() is mainly called in following cases as
+    /* drain_and_process() is mainly called in following cases as
      * Internal thread:
      *   Frequency of real polling can be controlled by
      *   PROGRESS_ENGINE_INTERVAL and PROGRESS_ENGINE_WCE_MAX.
@@ -207,10 +207,10 @@ int cq_mgr_rx_regrq::drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id 
                 m_p_cq_stat->n_rx_pkt_drop++;
                 reclaim_recv_buffer_helper(buff);
             } else {
-                bool procces_now = is_eth_tcp_frame(buff);
+                bool process_now = is_eth_tcp_frame(buff);
 
                 /* We process immediately all non udp/ip traffic.. */
-                if (procces_now) {
+                if (process_now) {
                     buff->rx.is_xlio_thr = true;
                     if ((++m_debt < (int)m_n_sysvar_rx_num_wr_to_post_recv) ||
                         !compensate_qp_poll_success(buff)) {

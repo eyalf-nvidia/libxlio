@@ -255,7 +255,7 @@ bool io_mux_call::handle_os_countdown(int &poll_os_countdown)
 void io_mux_call::polling_loops()
 {
     int poll_os_countdown = 0;
-    if (immidiate_return(poll_os_countdown)) {
+    if (immediate_return(poll_os_countdown)) {
         return;
     }
 
@@ -329,7 +329,7 @@ void io_mux_call::polling_loops()
             __if_dbg("2nd scenario timer update (elapsed %d)", m_elapsed.tv_usec);
         }
 
-        // update timer check with referance to number of offlaoded sockets in loop
+        // update timer check with reference to number of offloaded sockets in loop
         check_timer_countdown -= check_timer_countdown_step;
 
         if (g_b_exit || is_sig_pending()) {
@@ -388,7 +388,7 @@ void io_mux_call::blocking_loops()
         } else /* ret == 0 */ {
             timer_update();
 
-            // This poll attempt is necessary to resolve a race where CQE arrrives
+            // This poll attempt is necessary to resolve a race where CQE arrives
             // between we checked the CQ is empty but before we requested notification.
             if (!check_all_offloaded_sockets() || m_n_all_ready_fds) {
                 continue;
@@ -465,7 +465,7 @@ done:
 
 // check if we found anything in the constructor of select and poll
 // override in epoll
-bool io_mux_call::immidiate_return(int &poll_os_countdown)
+bool io_mux_call::immediate_return(int &poll_os_countdown)
 {
 
     prepare_to_poll();

@@ -530,7 +530,7 @@ static int add_flow_egress(struct store_pid *pid_value, struct store_flow *value
         /* This cleanup is done just to support verification */
         tc_del_qdisc(daemon_cfg.tc, value->tap_id);
 
-        /* Create rules to process ingress trafic on tap device */
+        /* Create rules to process ingress traffic on tap device */
         if (tc_add_qdisc(daemon_cfg.tc, value->tap_id) < 0) {
             log_error("[%d] failed tc_add_qdisc() errno = %d\n", pid, errno);
             rc = -EFAULT;

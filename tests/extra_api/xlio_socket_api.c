@@ -301,7 +301,7 @@ int main(int argc, char **argv)
         xlio_poll_group_poll(group);
     }
 
-    printf("Quiting...\n");
+    printf("Quitting...\n");
 
     rc = xlio_socket_destroy(sock);
     assert(rc == 0);

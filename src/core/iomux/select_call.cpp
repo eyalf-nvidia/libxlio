@@ -18,7 +18,7 @@
 #define FD_COPY(__fddst, __fdsrc, __nfds)                                                          \
     memcpy(__FDS_BITS(__fddst), __FDS_BITS(__fdsrc), ((__nfds) + 7) >> 3)
 
-#undef FD_ZERO // Remove select.h origianl FD_ZERO and define our own with limit size
+#undef FD_ZERO // Remove select.h original FD_ZERO and define our own with limit size
 #define FD_ZERO(__fddst, __nfds) memset(__FDS_BITS(__fddst), 0, ((__nfds) + 7) >> 3)
 iomux_func_stats_t g_select_stats;
 

@@ -77,7 +77,7 @@ int app_conf::proc_envoy(int __op, int __fd)
 {
     int rc = 0;
 
-    /* Prcess only sockets from map_listen_fd */
+    /* Process only sockets from map_listen_fd */
     auto iter = g_p_app->map_listen_fd.find(__fd);
     if (iter != g_p_app->map_listen_fd.end()) {
         sockinfo *p_socket_object = fd_collection_get_sockfd(__fd);
@@ -102,7 +102,7 @@ int app_conf::proc_envoy(int __op, int __fd)
              *
              * original listen sockets should be created first
              * original_listen_count count sockets that should be
-             * processed until openning a door for others.
+             * processed until opening a door for others.
              * timer should be enough to complete initialization of
              * all sockets related worker 0.
              */

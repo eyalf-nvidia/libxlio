@@ -212,7 +212,7 @@ void timer::process_registered_timers()
         /* Special check is need to protect
          * from using destroyed object pointed by handler
          * See unregister_timer_event()
-         * Object can be destoyed from another thread (lock protection)
+         * Object can be destroyed from another thread (lock protection)
          * and from current thread (lock and lock count condition)
          */
         if (iter->handler && !iter->lock_timer.trylock() &&

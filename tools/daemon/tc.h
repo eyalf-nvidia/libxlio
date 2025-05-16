@@ -41,7 +41,7 @@ struct tc_qdisc {
  * Initialize a tc object.
  *
  * @return
- *     the newly allocated netlink object. Must be freed with nl_destory.
+ *     the newly allocated netlink object. Must be freed with nl_destroy.
  */
 tc_t tc_create(void);
 

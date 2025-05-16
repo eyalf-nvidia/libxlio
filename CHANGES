@@ -40,7 +40,7 @@ Date + Time 2024-10-07
 Fixed:
         - RM #4082058 3.40.1 is causing a performance degradation with multiple nginx scenarios
         - RM #4071902 Getting low CPS Performance and wrong duration when running PKA with XLIO
-        - RM #4021863 XLIO with wrk while enabling multiple threads fails with a seg fault
+        - RM #4021863 XLIO with work while enabling multiple threads fails with a seg fault
 
 Version 3.40.1-1:
 Date + Time 2024-09-11
@@ -285,7 +285,7 @@ Added:
         - RM #3541126 Aggregate zerocopy buffers in a single segment
         - RM #3531441 Termination socket cleanup for delegated TCP timers
         - RM #3526588 Make xlio_exit symbol visible
-        - RM #3506903 CSV stats printer + debug coutners
+        - RM #3506903 CSV stats printer + debug counters
 Fixed:
         - RM #3531871 Socketxtreme latency
         - RM #3522495 CI for dpcp configuration
@@ -715,7 +715,7 @@ Date + Time 2021-10-25
 =============================================================
 Fixed:
         - RM #2821060 Fix for NGINX quic with non-power of 2 workers
-        - RM #2824476 Fix for unsafe m_pendig_to_remove_lst processing
+        - RM #2824476 Fix for unsafe m_pending_to_remove_lst processing
         - RM #2436876 Remove C++ Technical Report 1 (TR1) usage
 
 Version 1.1.2-1:

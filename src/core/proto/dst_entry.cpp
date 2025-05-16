@@ -709,7 +709,7 @@ bool dst_entry::alloc_transport_dep_res()
     return alloc_neigh_val(get_obs_transport_type());
 }
 
-bool dst_entry::alloc_neigh_val(transport_type_t tranport)
+bool dst_entry::alloc_neigh_val(transport_type_t transport)
 {
     bool ret_val = false;
 
@@ -718,7 +718,7 @@ bool dst_entry::alloc_neigh_val(transport_type_t tranport)
         m_p_neigh_val = nullptr;
     }
 
-    switch (tranport) {
+    switch (transport) {
     case XLIO_TRANSPORT_ETH:
     default:
         m_p_neigh_val = new neigh_eth_val;

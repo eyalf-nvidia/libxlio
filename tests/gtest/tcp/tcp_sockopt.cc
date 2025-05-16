@@ -173,7 +173,7 @@ TEST_F(tcp_sockopt, ti_2_tcp_congestion)
     EXPECT_EQ(0U, len);
 
 #if 0
-    // XLIO isn't complient with kernel in this case
+    // XLIO isn't compliant with kernel in this case
     rc = getsockopt(fd, IPPROTO_TCP, TCP_CONGESTION, NULL, &len);
     EXPECT_EQ(0, rc);
     EXPECT_EQ(0U, len);
@@ -188,7 +188,7 @@ TEST_F(tcp_sockopt, ti_2_tcp_congestion)
     EXPECT_EQ(EINVAL, errno);
 
 #if 0
-    // XLIO isn't complient with kernel in this case
+    // XLIO isn't compliant with kernel in this case
     rc = setsockopt(fd, IPPROTO_TCP, TCP_CONGESTION, NULL, 0);
     EXPECT_EQ(-1, rc);
     EXPECT_EQ(EINVAL, errno);
@@ -706,7 +706,7 @@ TEST_P(tcp_sockopt_positive, set_and_get_value)
     socklen_t actual_len = sizeof(actual_value);
     result = getsockopt(fd, level, optname, &actual_value, &actual_len);
     EXPECT_EQ(result, 0) << "getsockopt failed to get the value";
-    EXPECT_EQ(actual_len, sizeof(actual_value)) << "Got unexpected size of agument";
+    EXPECT_EQ(actual_len, sizeof(actual_value)) << "Got unexpected size of argument";
     ASSERT_EQ(actual_value, value);
 }
 
@@ -817,7 +817,7 @@ TEST_P(tcp_sockopt_default, matches_the_value_in_the_file)
     socklen_t actual_len = sizeof(getsockopt_value);
     auto result = getsockopt(fd, level, optname, &getsockopt_value, &actual_len);
     EXPECT_EQ(result, 0) << "getsockopt failed";
-    EXPECT_EQ(actual_len, sizeof(getsockopt_value)) << "Got unexpected size of agument";
+    EXPECT_EQ(actual_len, sizeof(getsockopt_value)) << "Got unexpected size of argument";
 
     /* Get the value from the file */
     int file_value = -1;
@@ -898,7 +898,7 @@ TEST_P(tcp_with_fifo, accepted_socket_inherits_the_setsockopt_param)
         EXPECT_EQ(pid, waitpid(pid, &status, 0));
         EXPECT_TRUE(WIFEXITED(status));
         EXPECT_EQ(result, 0) << "getsockopt failed to get the value";
-        EXPECT_EQ(actual_len, sizeof(actual_value)) << "Got unexpected size of agument";
+        EXPECT_EQ(actual_len, sizeof(actual_value)) << "Got unexpected size of argument";
 
         ASSERT_EQ(actual_value, value);
     } else if (pid == 0) { // Child process (the "client" process)

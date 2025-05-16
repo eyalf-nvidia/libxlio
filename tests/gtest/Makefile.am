@@ -160,7 +160,7 @@ gtest_DEPENDENCIES = \
 
 # This workaround allows to compile files located
 # at another directory.
-# This place resolve make distcheck isue
+# This place resolve make distcheck issue
 nodist_gtest_SOURCES = \
 	hash.c
 

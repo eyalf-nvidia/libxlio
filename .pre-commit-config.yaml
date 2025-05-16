@@ -22,6 +22,8 @@ repos:
         name: "[CHECK] Destroyed symlinks"
       - id: check-yaml
         name: "[CHECK] YAML syntax"
+      - id: check-toml
+        name: "[CHECK] TOML syntax"
       # Automatic fixes
       - id: end-of-file-fixer
         name: "[FIX] End of file"
@@ -32,3 +34,10 @@ repos:
       - id: trailing-whitespace
         name: "[FIX] Trailing whitespace"
         args: ["--markdown-linebreak-ext=md"]
+
+  # Spell checking
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.31.2
+    hooks:
+      - id: typos
+        name: "[CHECK] Spelling errors"

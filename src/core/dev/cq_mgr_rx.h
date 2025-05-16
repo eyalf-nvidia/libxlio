@@ -95,7 +95,7 @@ public:
      * @return  >=0 number of wce processed
      *          < 0 error
      */
-    virtual int drain_and_proccess(uintptr_t *p_recycle_buffers_last_wr_id = nullptr) = 0;
+    virtual int drain_and_process(uintptr_t *p_recycle_buffers_last_wr_id = nullptr) = 0;
 
     // CQ implements the Rx mem_buf_desc_owner.
     // These callbacks will be called for each Rx buffer that passed processed completion

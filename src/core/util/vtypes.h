@@ -108,7 +108,7 @@ static inline uint64_t ntohll(uint64_t x)
 #define IPV4_IGMP_HDR_LEN_WORDS      (IPV4_IGMP_HDR_LEN / sizeof(uint32_t))
 #define IGMP_HDR_LEN                 (sizeof(struct igmphdr))
 #define IGMP_HDR_LEN_WORDS           (IGMP_HDR_LEN / sizeof(uint32_t))
-#define MAX_APP_ID_LENGHT            64
+#define MAX_APP_ID_LENGTH            64
 
 #define INPORT_ANY ((uint16_t)0x0000)
 
