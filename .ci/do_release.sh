@@ -7,7 +7,7 @@ echo "**********************************"
 set -o pipefail
 
 print_help() {
-    set +xv  
+    set +xv
     echo -e "\n\n"
     echo "--------------------------------------------------"
     echo "Usage: release_folder=<release folder> release_tag=<release tag> [revision=<revision>] [do_release=<true|false>] $0"
@@ -63,7 +63,7 @@ if [ "${do_release}" = true ] ; then
     pkg_name=$(ls -1 libxlio-"${release_tag}"-"${revision}".src.rpm)
     DST_DIR=${release_folder}/${release_tag}
 
-    if [[ -e "${DST_DIR}/${pkg_name}" ]]; then 
+    if [[ -e "${DST_DIR}/${pkg_name}" ]]; then
         echo "ERROR: [${DST_DIR}/${pkg_name}] file already exist. Exit"
         exit 1
     fi

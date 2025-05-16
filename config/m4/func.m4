@@ -5,7 +5,7 @@
 #
 
 # func.m4 - Collection of functions
-# 
+#
 
 ##########################
 # Configure functions

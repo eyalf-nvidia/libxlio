@@ -145,13 +145,13 @@ Keep these rules in mind as you are working:
 
 
 ## <a name="tests"></a> Unit tests
-This set of tests is based on [Google Test C++] (https://github.com/google/googletest) environment 
+This set of tests is based on [Google Test C++] (https://github.com/google/googletest) environment
 
 Suite support [TAP protocol](https://en.wikipedia.org/wiki/Test_Anything_Protocol) for test result output.
 Just set **GTEST_TAP=2** as  environment variable.
 
 This suite includes standard socket api and library specific api tests.
-**LD_PRELOAD** should be done to verify target library. 
+**LD_PRELOAD** should be done to verify target library.
 
 Build standard tests:
 ```shell
@@ -194,7 +194,7 @@ The project uses Jenkins as a popular open source tool to perform continuous int
 The [Continuous Integration (CI)](../.ci/README.md) scripts are located in [.ci](../.ci) folder.
 Jenkins behavior can be controlled by job_matrix.yaml file which has similar syntax/approach as Github actions.
 
-Some verification can be done locally. 
+Some verification can be done locally.
 ```shell
 $ env WORKSPACE=<srcdir> TARGET=[default|extra] jenkins_test_build=yes <srcdir>/contrib/test_jenkins.sh
 ```

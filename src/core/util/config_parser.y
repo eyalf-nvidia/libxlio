@@ -53,9 +53,9 @@ static void __xlio_set_ipv4_addr(short a0, short a1, short a2, short a3)
 {
 	char buf[16];
 	struct in_addr *p_ipv4 = NULL;
-  
+
 	p_ipv4 = &(__xlio_address_port_rule->ipv4);
-  
+
 	sprintf(buf,"%d.%d.%d.%d", a0, a1, a2, a3);
 	if (1 != inet_pton(AF_INET, (const char*)buf, p_ipv4)) {
 		parse_err = 1;
@@ -67,7 +67,7 @@ static void __xlio_set_inet_addr_prefix_len(unsigned char prefixlen)
 {
 	if (prefixlen > 32)
 		prefixlen = 32;
-	
+
 	__xlio_address_port_rule->prefixlen = prefixlen;
 }
 
@@ -88,10 +88,10 @@ void __xlio_dump_address_port_rule_config_state(char *buf) {
 	} else {
 		sprintf(buf+strlen(buf), " *");
 	}
-	
+
 	if (__xlio_address_port_rule->match_by_port) {
 		sprintf(buf+strlen(buf), ":%d",__xlio_address_port_rule->sport);
-		if (__xlio_address_port_rule->eport > __xlio_address_port_rule->sport) 
+		if (__xlio_address_port_rule->eport > __xlio_address_port_rule->sport)
 			sprintf(buf+strlen(buf), "-%d",__xlio_address_port_rule->eport);
 	}
 	else
@@ -101,8 +101,8 @@ void __xlio_dump_address_port_rule_config_state(char *buf) {
 /* dump the current state in readable format */
 static void  __xlio_dump_rule_config_state() {
 	char buf[1024];
-	sprintf(buf, "\tACCESS CONFIG: use %s %s %s ", 
-			__xlio_get_transport_str(__xlio_rule.target_transport), 
+	sprintf(buf, "\tACCESS CONFIG: use %s %s %s ",
+			__xlio_get_transport_str(__xlio_rule.target_transport),
 			__xlio_get_role_str(current_role),
 			__xlio_get_protocol_str(__xlio_rule.protocol));
 	__xlio_address_port_rule = &(__xlio_rule.first);
@@ -118,7 +118,7 @@ static void  __xlio_dump_rule_config_state() {
 /* dump configuration properites of new instance */
 static void  __xlio_dump_instance() {
 	char buf[1024];
-	
+
 	if (curr_instance) {
 		sprintf(buf, "CONFIGURATION OF INSTANCE ");
 		if (curr_instance->id.prog_name_expr)
@@ -133,15 +133,15 @@ static void  __xlio_dump_instance() {
 static void __xlio_add_dbl_lst_node_head(struct dbl_lst *lst, struct dbl_lst_node *node)
 {
 	if (node && lst) {
-	
+
 		node->prev = NULL;
 		node->next = lst->head;
-		
+
 		if (!lst->head)
 			lst->tail = node;
-		else 
-			lst->head->prev = node;	
-					
+		else
+			lst->head->prev = node;
+
 		lst->head = node;
 	}
 }
@@ -150,10 +150,10 @@ static void __xlio_add_dbl_lst_node(struct dbl_lst *lst, struct dbl_lst_node *no
 {
 	if (node && lst) {
 		node->prev = lst->tail;
-	
-		if (!lst->head) 
+
+		if (!lst->head)
 			lst->head = node;
-		else 
+		else
 			lst->tail->next = node;
 		lst->tail = node;
 	}
@@ -162,14 +162,14 @@ static void __xlio_add_dbl_lst_node(struct dbl_lst *lst, struct dbl_lst_node *no
 static struct dbl_lst_node* __xlio_allocate_dbl_lst_node()
 {
 	struct dbl_lst_node *ret_val = NULL;
-	
+
 	ret_val = (struct dbl_lst_node*) malloc(sizeof(struct dbl_lst_node));
 	if (!ret_val) {
 		yyerror("fail to allocate new node");
-		parse_err = 1;		
+		parse_err = 1;
 	}
 	else
-		memset((void*) ret_val, 0, sizeof(struct dbl_lst_node));	
+		memset((void*) ret_val, 0, sizeof(struct dbl_lst_node));
 	return ret_val;
 }
 
@@ -177,21 +177,21 @@ static struct dbl_lst_node* __xlio_allocate_dbl_lst_node()
 static void __xlio_add_instance(char *prog_name_expr, char *user_defined_id) {
 	struct dbl_lst_node *curr, *new_node;
 	struct instance *new_instance;
-  
+
 	curr = __instance_list.head;
 	while (curr) {
 		struct instance *instance = (struct instance*)curr->data;
 		if (!strcmp(prog_name_expr, instance->id.prog_name_expr) && !strcmp(user_defined_id, instance->id.user_defined_id)) {
 			curr_instance = (struct instance*)curr->data;
 			if (__xlio_min_level <= 1) __xlio_dump_instance();
-			return;  		
+			return;
 		}
 		curr = curr->next;
 	}
-  
-	if (!(new_node = __xlio_allocate_dbl_lst_node())) 
+
+	if (!(new_node = __xlio_allocate_dbl_lst_node()))
 		return;
-	
+
 	new_instance = (struct instance*) malloc(sizeof(struct instance));
 	if (!new_instance) {
 		free(new_node);
@@ -203,7 +203,7 @@ static void __xlio_add_instance(char *prog_name_expr, char *user_defined_id) {
 	memset((void*) new_instance, 0, sizeof(struct instance));
 	new_instance->id.prog_name_expr = strdup(prog_name_expr);
 	new_instance->id.user_defined_id = strdup(user_defined_id);
-  
+
 	if (!new_instance->id.prog_name_expr || !new_instance->id.user_defined_id) {
 		yyerror("failed to allocate memory");
 		parse_err = 1;
@@ -236,7 +236,7 @@ static void __xlio_add_rule() {
 		__xlio_add_instance("*", "*");
   	if (!curr_instance)
 		return;
-  
+
 	if (__xlio_min_level <= 1) __xlio_dump_rule_config_state();
 	switch (current_role) {
 	case ROLE_TCP_SERVER:
@@ -261,9 +261,9 @@ static void __xlio_add_rule() {
 		break;
 	}
 
-	if (!(new_node = __xlio_allocate_dbl_lst_node())) 
+	if (!(new_node = __xlio_allocate_dbl_lst_node()))
 		return;
-	
+
 	rule = (struct use_family_rule *)malloc(sizeof(*rule));
 	if (!rule) {
 		free(new_node);
@@ -273,7 +273,7 @@ static void __xlio_add_rule() {
 	}
 	memset(rule, 0, sizeof(*rule));
 	new_node->data = (void*)rule;
-	*((struct use_family_rule *)new_node->data) = __xlio_rule; 
+	*((struct use_family_rule *)new_node->data) = __xlio_rule;
 	if (__xlio_rule_push_head)
 		__xlio_add_dbl_lst_node_head(p_lst, new_node);
 	else
@@ -286,7 +286,7 @@ static void __xlio_add_rule() {
 %union {
   int        ival;
   char      *sval;
-}             
+}
 
 %token USE "use"
 %token TCP_CLIENT "tcp client"
@@ -313,7 +313,7 @@ static void __xlio_add_rule() {
 %token LEVEL "min-level"
 %token LINE "new line"
 %type <sval> NAME PROGRAM USER_DEFINED_ID_STR
-%type <ival> INT LOG DEST STDERR SYSLOG FILENAME APP_ID USE OS XLIO SDP TCP UDP TCP_CLIENT TCP_SERVER UDP_SENDER UDP_RECEIVER UDP_CONNECT LEVEL LINE 
+%type <ival> INT LOG DEST STDERR SYSLOG FILENAME APP_ID USE OS XLIO SDP TCP UDP TCP_CLIENT TCP_SERVER UDP_SENDER UDP_RECEIVER UDP_CONNECT LEVEL LINE
 %start config
 
 %{
@@ -325,11 +325,11 @@ NL:
 	  LINE
 	| NL LINE
 	|;
-    
+
 ONL:
 	| NL;
-    
-config: 
+
+config:
 	ONL statements
 	;
 
@@ -337,13 +337,13 @@ statements:
 	| statements statement
 	;
 
-statement: 
+statement:
  	log_statement
-	| app_id_statement  
+	| app_id_statement
 	| socket_statement
 	;
 
-log_statement: 
+log_statement:
  	LOG log_opts NL
 	;
 
@@ -352,13 +352,13 @@ log_opts:
 	| log_opts verbosity
 	;
 
-log_dest: 
+log_dest:
  	  DEST STDERR			{ __xlio_log_set_log_stderr(); }
 	| DEST SYSLOG			{ __xlio_log_set_log_syslog(); }
   	| DEST FILENAME NAME		{ __xlio_log_set_log_file($3); }
 	;
-    
-verbosity: 
+
+verbosity:
 	LEVEL INT { __xlio_log_set_min_level($2); }
 	;
 
@@ -372,13 +372,13 @@ app_id:
 	;
 
 
-socket_statement: 
+socket_statement:
     use transport role tuple NL { __xlio_add_rule(); }
  	;
- 	
+
 use:
 	USE { current_conf_type = CONF_RULE; }
- 	; 
+ 	;
 
 transport:
  	  OS	{ __xlio_rule.target_transport = TRANS_OS;	}
@@ -443,7 +443,7 @@ int yyerror(const char *msg)
 	char *final_msg = (char*)malloc(strlen(msg)+25);
 
 	strcpy(orig_msg, msg);
-	
+
 	char *word = strtok(orig_msg, " ");
 	final_msg[0] = '\0';
 	while (word != NULL) {
@@ -457,10 +457,10 @@ int yyerror(const char *msg)
 		}
 		word = strtok(NULL, " ");
 	}
-	
+
 	__xlio_log(9, "Error (line:%ld) : %s\n", __xlio_config_line_num, final_msg);
 	parse_err = 1;
-	
+
 	free(orig_msg);
 	free(final_msg);
 	return 1;
@@ -472,10 +472,10 @@ int yyerror(const char *msg)
 /* parse apollo route dump file */
 int __xlio_parse_config_file (const char *fileName) {
 	extern FILE * libxlio_yyin;
-   
+
 	/* open the file */
 	if (access(fileName, R_OK)) {
-		printf("libxlio Error: No access to open File:%s %s\n", 
+		printf("libxlio Error: No access to open File:%s %s\n",
 				fileName, strerror(errno));
 		return(1);
 	}
@@ -499,20 +499,20 @@ int __xlio_parse_config_file (const char *fileName) {
 
 int __xlio_parse_config_line (char *line) {
 	extern FILE * libxlio_yyin;
-	
+
 	__xlio_rule_push_head = 1;
-	
+
 	libxlio_yyin = fmemopen(line, strlen(line), "r");
-	
+
 	if (!libxlio_yyin) {
 		printf("libxlio Error: Fail to parse line:%s\n", line);
 		return(1);
 	}
-	
+
 	parse_err = 0;
 	yyparse();
-	
+
 	fclose(libxlio_yyin);
-	
+
 	return(parse_err);
 }

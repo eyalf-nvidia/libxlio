@@ -19,9 +19,9 @@ while [ ! -z "$rcont" ]
 	 sleep 1;
  done;
 
-if [ -z "$rcont" ] 
+if [ -z "$rcont" ]
  then
- 	rm -f $RDIR/xlio_package.yaml	 
+ 	rm -f $RDIR/xlio_package.yaml
 	cp template_xlio.yaml $SRDIR/xlio_package.yaml
 	sed -i 's@BRANCH@'"${BRTG}"'@g' $SRDIR/xlio_package.yaml
 	sed -i 's@BUILD_ID@'"${BUILD_ID}"'@g' $SRDIR/xlio_package.yaml

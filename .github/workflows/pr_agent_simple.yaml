@@ -9,11 +9,11 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
-  checks: none 
+  checks: none
 
 jobs:
   handle_pr_comments:
-    runs-on: 
+    runs-on:
       - pr-agent
       - self-hosted
     if: ${{ github.event_name == 'issue_comment' && github.event.sender.type != 'Bot' && startsWith(github.event.comment.body, '/') }}
@@ -38,9 +38,9 @@ jobs:
               ;;
           esac
 
-      # We use GitHub App to authenticate the PR-agent bot: 
+      # We use GitHub App to authenticate the PR-agent bot:
       # Link to GH App: https://github.com/organizations/Mellanox-lab/settings/apps/pr-review-bot-app
-      # App doesn't use classic or Fine-Grained token, but is working with short-term auth tokens instead, 
+      # App doesn't use classic or Fine-Grained token, but is working with short-term auth tokens instead,
       # with TTL=1 hour, which requires refresh minimum once an hour.
       # To make it simple, we re-generate the token each time we call PR-agent for PR review
       # but in the future, we can make use of the Actions caching mechanism to refresh not so often.
@@ -57,4 +57,3 @@ jobs:
           echo "BOT_ACTION=${{ steps.detect_command.outputs.bot_action }}"
           cd /app
           python3 /app/pr_agent/cli.py --pr_url "$PR_URL" "${{ steps.detect_command.outputs.bot_action }}"
-

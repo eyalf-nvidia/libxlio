@@ -9,8 +9,8 @@ BACKLOG=10
 myHost = sys.argv[1]
 myPort = int(sys.argv[2])
 mySocksNum = int(sys.argv[3])
-#s.bind((myHost, myPort)) 
-#s.listen(BACKLOG) 
+#s.bind((myHost, myPort))
+#s.listen(BACKLOG)
 socks = []
 addrs = []
 buffs = ["1234567890123456", "abcdefghijklmnop", "zozzozzozzoz1234"]
@@ -41,4 +41,3 @@ for x in range(mySocksNum):
 
 for x in range(mySocksNum):
     socks[x].close()
-

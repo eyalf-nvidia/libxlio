@@ -9,9 +9,8 @@ gh:
   repo: Mellanox/libxlio
   appId: "1200830"
   secretKeyName: gh-app-mlnx-secret-key
-openai: 
+openai:
   apiKeySecretName: openai-key
   deploymentId: gpt-4o-20241120
   apiBase: https://llm-proxy.perflab.nvidia.com
   apiType: azure
-  

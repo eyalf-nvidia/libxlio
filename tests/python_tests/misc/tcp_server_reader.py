@@ -8,8 +8,8 @@ BACKLOG=10
 myHost = sys.argv[1]
 myPort = int(sys.argv[2])
 s = socket(AF_INET, SOCK_STREAM) # create a TCP socket
-s.bind((myHost, myPort)) 
-s.listen(BACKLOG) 
+s.bind((myHost, myPort))
+s.listen(BACKLOG)
 
 tempSock, tempAddr = s.accept()
 
@@ -24,5 +24,3 @@ os._exit(0)
 #    time.sleep(5)
 
 print "Done " + str(rc)
-
-

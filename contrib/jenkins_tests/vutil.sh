@@ -245,7 +245,7 @@ start_server()
 	[ ! -z "${server_pid}" ] && ssh root@${ipaddr} kill -9 ${server_pid}
 
 	tmp=$(mktemp)
-	ssh root@${ipaddr} "${server_cmd}" >> ${tmp} 2>&1 >> ${tmp} & 
+	ssh root@${ipaddr} "${server_cmd}" >> ${tmp} 2>&1 >> ${tmp} &
 	sleep 5
 	res=$(cat ${tmp})
 	rm -f ${tmp}
@@ -288,15 +288,15 @@ perform_ts()
 		tsn="ts_${ts}_tc${i}"
 		if [ ! -z  "${!tsn}" ] ; then
 			tsnv=${!tsn}
-			start_server "${app_env}" "${ipaddr}" ${port} "--tcp" "${log_file}" "${tsnv}"    
+			start_server "${app_env}" "${ipaddr}" ${port} "--tcp" "${log_file}" "${tsnv}"
 
 			if [ -z "${dbg_srv}" ] ; then
-				name=$(echo ${tsnv} | awk -F${dlm} '{ print $1 }') 
+				name=$(echo ${tsnv} | awk -F${dlm} '{ print $1 }')
 				echo ${name}
-				st=$(echo ${tsnv} | awk -F${dlm} '{ print $2 }') 
+				st=$(echo ${tsnv} | awk -F${dlm} '{ print $2 }')
 				cmd_test="env ${app_env} ${st} -p ${port}"
 				local res=$(${cmd_test} 2>&1)
-				echo "${res}" 
+				echo "${res}"
 				echo "${res}" >> "${log_file}"
 				client_fail=$(echo ${tsnv} | awk -F${dlm} '{ print $6 }')
 				chk_res=$(check_message "${client_fail}" "${res}")
@@ -313,7 +313,7 @@ perform_ts()
 			stop_server "${ipaddr}" "${server_pid}" "${log_file}"
 		else
 			break
-		fi 
+		fi
 	done
 	log_st "${log_st_file}" "***********"
 }
@@ -327,10 +327,10 @@ prepare_perform_ts()
 	end_num=${num_tests#*-}
 
 	HOST=${HOST%%.*}
-	[ -z "${SERVER_DIR}" ] && SERVER_DIR="/tmp/sockperf_exec_${HOST}" 
+	[ -z "${SERVER_DIR}" ] && SERVER_DIR="/tmp/sockperf_exec_${HOST}"
 
 	if [ ! -z "${SRV_OPS}" ] ; then
-	if [ "${SRV_OPS}" == "start" ] ; then 
+	if [ "${SRV_OPS}" == "start" ] ; then
 		start_server "${app_env}" ${target} ${port} "--tcp" "${log_file}"
 		stop_server ${target} "${server_pid}" "${log_file}"
 	fi
@@ -343,7 +343,7 @@ prepare_perform_ts()
 usage()
 {
 cat << eOm
-	usage:$0 -a app [-x|--app-arg 'args'] [-e|--app-env 'vars'] [-t|--task test] [-s|--target address] [-p|--port N] 
+	usage:$0 -a app [-x|--app-arg 'args'] [-e|--app-env 'vars'] [-t|--task test] [-s|--target address] [-p|--port N]
 			[-l|--log fname] [--server-dir dir] [--dr] [-h]
 eOm
 	exit 0
@@ -417,4 +417,3 @@ else
 fi
 
 #</vutil.sh>
-

@@ -20,7 +20,7 @@ clang_allowed_versoins="15 16"
 if [[ ! "$clang_allowed_versoins" =~ "$clang_version" ]]; then
     echo "Wrong clang-version: $clang_version"
     exit 1
-fi 
+fi
 
 test_app="clang-format"
 

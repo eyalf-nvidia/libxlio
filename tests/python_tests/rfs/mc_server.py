@@ -47,4 +47,3 @@ for y in range(recv_factor):
 
 for x in range(mySocksNum):
     socks[x].close()
-

@@ -7,7 +7,7 @@ libstate_machine_la_SOURCES = \
 	sm.cpp \
 	sm_fifo.h \
 	sm.h
-	
+
 
 noinst_PROGRAMS = state_machine_test
 state_machine_test_LDADD = \
@@ -16,7 +16,7 @@ state_machine_test_LDADD = \
 	$(top_builddir)/src/vlogger/libvlogger.la
 
 state_machine_test_SOURCES = main.cpp
-	
+
 state_machine_test_DEPENDENCIES = \
 	libstate_machine.la \
 	$(top_builddir)/src/utils/libutils.la \

@@ -5,7 +5,7 @@
 #
 
 # dpcp.m4 - Library to operate with DevX
-# 
+#
 
 ##########################
 # libdpcp usage support

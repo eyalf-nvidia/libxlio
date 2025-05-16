@@ -5,7 +5,7 @@
 #
 
 # opt.m4 - Macros to control optimization
-# 
+#
 
 ##########################
 # Logging control

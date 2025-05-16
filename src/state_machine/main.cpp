@@ -66,7 +66,7 @@ sm_short_table_line_t sm_short_table[] = {
 #if 0
 
 typedef struct {
-	int  event;             
+	int  event;
 	char* name;
 } test_entry;
 

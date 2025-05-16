@@ -73,4 +73,3 @@ else:
 
     for x in range(mySocksNum):
         socks[x].close()
-

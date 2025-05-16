@@ -45,4 +45,3 @@ tests:
 demo:
 	$(MAKE)
 	$(MAKE) -C src/core/infra
-

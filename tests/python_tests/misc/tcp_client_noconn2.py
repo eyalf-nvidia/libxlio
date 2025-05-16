@@ -31,5 +31,3 @@ while rc != 0:
     rc = sock.connect_ex((myHost, myPort))
 
 print "All sockets connected"
-
-

@@ -62,4 +62,3 @@ For more information please refer to [official ci-demo repository](https://githu
     docker exec -it ${IMAGE_NAME} bash
     ```
 Navigate to `$WORKSPACE` directory inside the image
-

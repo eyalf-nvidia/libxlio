@@ -1,5 +1,5 @@
 # Requires root permissions
-# Install scapy for root user: pip install scapy 
+# Install scapy for root user: pip install scapy
 
 # To prevent Kernel to reply with RST to incoming traffic:
 # sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -s <dst_ip> -j DROP
@@ -56,5 +56,3 @@ match option:
         print("Options:")
         print("1. Send SYN and FIN")
         print("2. Send SYN and RST")
-
-    

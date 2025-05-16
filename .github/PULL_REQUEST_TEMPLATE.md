@@ -2,7 +2,7 @@
 Please provide a summary of the change.
 
 ##### What
-_Subject: what this PR is doing in one line._ 
+_Subject: what this PR is doing in one line._
 
 ##### Why ?
 _Justification for the PR. If there is existing issue/bug please reference._
@@ -28,4 +28,3 @@ What kind of change does this PR introduce?
 - [ ] Comments have been inserted in hard to understand places
 - [ ] Documentation has been updated (if necessary)
 - [ ] Test has been added (if possible)
-

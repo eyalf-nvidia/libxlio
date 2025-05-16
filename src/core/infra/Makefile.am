@@ -49,4 +49,3 @@ libinfra_la_SOURCES = \
 #cache_test_DEPENDENCIES = \
 #	libinfra.la \
 #	$(top_builddir)/src/vlogger/libvlogger.la
-

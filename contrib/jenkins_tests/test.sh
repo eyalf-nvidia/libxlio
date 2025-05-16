@@ -55,7 +55,7 @@ if [ ! -z "${test_remote_ip}" ] ; then
 	[ -z "${NODE_NAME}" ] && NODE_NAME=${HOSTNAME}
 	sperf_exec_dir="/tmp/sockperf_exec_${NODE_NAME}"
 	rmt_user=root
- 
+
 	rmt_os=$(${sudo_cmd} ssh ${rmt_user}@${test_remote_ip} ". /etc/os-release ; echo \${NAME,,} | awk '{print \$1}'")
 	[ ! -z "${test_remote_rebuild}" ] && rmt_os="rebuld"
 	local_os=$(. /etc/os-release ; echo ${NAME,,} | awk '{print $1}')
@@ -68,7 +68,7 @@ if [ ! -z "${test_remote_ip}" ] ; then
 			${sudo_cmd} scp -q ${test_app} ${rmt_user}@${test_remote_ip}:${sperf_exec_dir}
 			${sudo_cmd} scp -q ${test_lib} ${rmt_user}@${test_remote_ip}:${sperf_exec_dir}
 			eval "pid=$(${sudo_cmd} ssh ${rmt_user}@${test_remote_ip} pidof ${prj_service})"
-			if [ ! -z "${pid}" ] ;  then 
+			if [ ! -z "${pid}" ] ;  then
 				echo "${prj_service} pid=${pid}"
 				eval "${sudo_cmd} ssh ${rmt_user}@${test_remote_ip} kill -9 ${pid}"
 			fi
@@ -116,7 +116,7 @@ for test_link in $test_ip_list; do
 			if [ ! -z "${test_remote_ip}" ] ; then
 
 				eval "pid=$(${sudo_cmd} pidof ${prj_service})"
-				[ ! -z "${pid}" ] && eval "${sudo_cmd} kill -9 ${pid}" 
+				[ ! -z "${pid}" ] && eval "${sudo_cmd} kill -9 ${pid}"
 				eval "${sudo_cmd} ${install_dir}/sbin/${prj_service} --console -v5 & "
 
 				echo "BUILD_NUMBER=${BUILD_NUMBER}"

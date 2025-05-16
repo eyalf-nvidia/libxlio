@@ -58,4 +58,3 @@ jjb:
 	ssh ${JENKINS_HOST} sudo jenkins-jobs update $(shell pwd)/proj_jjb.yaml
 	ssh ${JENKINS_HOST} sudo jenkins-jobs update $(shell pwd)/perf_jjb.yaml
 	ssh ${JENKINS_HOST} sudo jenkins-jobs update $(shell pwd)/opensource_jjb.yaml
-

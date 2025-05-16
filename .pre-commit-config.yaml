@@ -1,0 +1,34 @@
+repos:
+
+  # Security, validation checks, and automatic fixes
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Security and validation
+      - id: detect-private-key
+        name: "[SECURITY] Private key detection"
+      - id: check-added-large-files
+        name: "[CHECK] Large files detection"
+        args: [--maxkb=128]
+      - id: check-case-conflict
+        name: "[CHECK] Case conflicts"
+      - id: check-merge-conflict
+        name: "[CHECK] Merge conflicts"
+      - id: check-vcs-permalinks
+        name: "[CHECK] VCS permalinks"
+      - id: check-shebang-scripts-are-executable
+        name: "[CHECK] Executable scripts"
+      - id: destroyed-symlinks
+        name: "[CHECK] Destroyed symlinks"
+      - id: check-yaml
+        name: "[CHECK] YAML syntax"
+      # Automatic fixes
+      - id: end-of-file-fixer
+        name: "[FIX] End of file"
+      - id: fix-byte-order-marker
+        name: "[FIX] Byte order marker"
+      - id: mixed-line-ending
+        name: "[FIX] Line endings"
+      - id: trailing-whitespace
+        name: "[FIX] Trailing whitespace"
+        args: ["--markdown-linebreak-ext=md"]

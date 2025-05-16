@@ -34,7 +34,7 @@ spec:
       args: ["/etc/xlio_pkg/set_env.sh BRANCH BUILD_ID"]
       securityContext:
         privileged: true
-        capabilities: 
+        capabilities:
           add: ["SYS_ADMIN"]
         seccompProfile:
           type: Unconfined

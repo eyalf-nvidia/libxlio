@@ -39,5 +39,3 @@ if (myExpectedAddr != src_addr[0]):
 sock.sendto("greetings", addrinfo_sendto[0][4])
 
 sock.close()
-
-

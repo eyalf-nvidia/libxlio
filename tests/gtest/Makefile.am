@@ -168,4 +168,3 @@ CLEANFILES = hash.c
 
 hash.c:
 	@echo "#include \"$(top_builddir)/tools/daemon/$@\"" >$@
-

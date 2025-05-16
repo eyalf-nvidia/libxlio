@@ -103,7 +103,7 @@ EOF
 map_os_and_arch
 
 # Install DOCA repo GPG key
-curl -o "${GPG_KEY}" "${DOCA_REPO_PATH}/${DOCA_VERSION}/${OS}/${ARCH}/${DOCA_BRANCH}/${GPG_KEY}" 
+curl -o "${GPG_KEY}" "${DOCA_REPO_PATH}/${DOCA_VERSION}/${OS}/${ARCH}/${DOCA_BRANCH}/${GPG_KEY}"
 
 eval "${GPG_KEY_CMD}"
 
@@ -112,12 +112,12 @@ REPO_URL="${DOCA_REPO_PATH}/${DOCA_VERSION}/${OS}/${ARCH}/${DOCA_BRANCH}/"
 eval "${REPO_CMD}"
 
 # Install DOCA
-${PKG_MGR} ${UPDATE_CMD} 
+${PKG_MGR} ${UPDATE_CMD}
 
 ${PKG_MGR} install -y doca-ofed-userspace
 
 echo "=============================================="
-echo 
+echo
 echo "DOCA for Host has been successfully installed"
 echo
 echo "=============================================="

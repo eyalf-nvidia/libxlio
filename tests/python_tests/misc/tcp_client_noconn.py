@@ -19,4 +19,3 @@ print "All sockets connected"
 
 for x in range(mySocksNum):
     socks[x].close()
-

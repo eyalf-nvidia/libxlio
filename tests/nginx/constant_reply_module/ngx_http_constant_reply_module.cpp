@@ -153,4 +153,3 @@ static ngx_int_t ngx_http_constant_reply_handler(ngx_http_request_t *r)
     // Send reply content
     return ngx_http_output_filter(r, &out);
 }
-

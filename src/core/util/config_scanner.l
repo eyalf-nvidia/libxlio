@@ -7,7 +7,7 @@
 
 %{
 
-//#define DEBUG 1  
+//#define DEBUG 1
 
 #define yyparse libxlio_yyparse
 #define yylex   libxlio_yylex
@@ -33,7 +33,7 @@ extern long __xlio_config_line_num;
 
 application-id {
 	yylval.ival = APP_ID;
-#ifdef DEBUG 
+#ifdef DEBUG
 	printf("APP_ID\n");
 #endif
 	BEGIN(APP_ID_S1);
@@ -60,7 +60,7 @@ application-id {
 	return (USER_DEFINED_ID_STR);
 }
 
-([1-9][0-9]*|0) { 
+([1-9][0-9]*|0) {
 	yylval.ival = atoi(yytext);
 #ifdef DEBUG
 	printf("INT:%d\n",yylval.ival);
@@ -253,4 +253,3 @@ int yywrap ()
 {
 	return (1);
 }
-

@@ -325,7 +325,7 @@ bool fooBar(bool Baz, char* str, std::vector<int>& Result);
 ## #include Statements
 
 - Include headers in the following order: `config.h`, Related header, C system headers, C++ standard library headers, other libraries' headers, your project's headers..
-    
+
     * **Pros:**
     - Forward declarations can save compile time, as #includes force the compiler to open more files and process more input.
     - Forward declarations can save on unnecessary recompilation. #includes can force your code to be recompiled more often, due to unrelated changes in the header.

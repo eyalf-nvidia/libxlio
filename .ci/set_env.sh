@@ -13,7 +13,7 @@ apt-get update
 cd /etc/xlio_pkg/xlio
 rm -rf libxlio/
 
-git clone https://github.com/Mellanox/libxlio.git 
+git clone https://github.com/Mellanox/libxlio.git
 
 cd libxlio/
 git checkout $BRTG
@@ -30,4 +30,3 @@ echo "Copy Done"
 
 
 echo "0" > $ST_FILE
-

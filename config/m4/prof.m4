@@ -5,7 +5,7 @@
 #
 
 # prof.m4 - Profiling, instrumentation
-# 
+#
 
 ##########################
 # libibprof profiling support

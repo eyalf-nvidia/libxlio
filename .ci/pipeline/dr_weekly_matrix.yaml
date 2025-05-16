@@ -46,7 +46,7 @@ steps:
       if (!job.isBuildable()) {
           echo "The job '${env.JOB}' is disabled. Enabling..."
           job.setDisabled(false)
-      } 
+      }
       echo "The Job is enabled. Starting..."
 
   - name: Run Job with parameters

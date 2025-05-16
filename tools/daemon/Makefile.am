@@ -6,8 +6,8 @@ xliod_CPPFLAGS = \
 	-I$(top_srcdir)/src \
 	-I$(top_srcdir)/src/core
 
-xliod_LDFLAGS  = 
-xliod_CFLAGS = 
+xliod_LDFLAGS  =
+xliod_CFLAGS =
 
 xliod_SOURCES = \
 	daemon.c \

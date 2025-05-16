@@ -35,5 +35,3 @@ for x in range(mySocksNum):
 
 socks1.close()
 socks2.close()
-
-
