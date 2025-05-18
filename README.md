@@ -79,6 +79,31 @@ LD_PRELOAD=libxlio.so XLIO_NGINX_WORKERS_NUM=\<N> nginx \<nginx_params>
 
 N - Number of Nginx workers.
 
+### Pre-commit Setup
+
+This project uses pre-commit hooks to ensure code quality.
+
+#### Prerequisites and Installation
+
+- Python 3.10+ and pip
+- Install and set up:
+
+```sh
+pip install -r dev-requirements.txt
+pre-commit install  # Optional: only needed if you want hooks to run automatically on commit
+```
+
+#### Usage
+
+Pre-commit runs automatically on `git commit` if hooks are installed. To run manually:
+
+```sh
+pre-commit run --all-files  # All files
+pre-commit run              # Staged files only
+```
+
+> Note: Pre-commit checks are also automatically run in GitHub workflows for all pushes and pull requests.
+
 ## Architecture
 
 ![](docs/arch.png)
