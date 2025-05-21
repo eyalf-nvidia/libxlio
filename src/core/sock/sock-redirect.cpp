@@ -158,7 +158,7 @@ void get_orig_funcs()
 }
 #endif /* XLIO_STATIC_BUILD */
 
-#define VERIFY_PASSTHROUGH_CHANGED(__ret, __func_and_params__)                                      \
+#define VERIFY_PASSTHROUGH_CHANGED(__ret, __func_and_params__)                                     \
     do {                                                                                           \
         bool passthrough = p_socket_object->isPassthrough();                                       \
         __ret = __func_and_params__;                                                               \

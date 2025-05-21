@@ -306,8 +306,8 @@ inline bool cq_mgr_rx_strq::strq_cqe_to_mem_buff_desc(struct xlio_mlx5_cqe *cqe,
 }
 
 int cq_mgr_rx_strq::drain_and_process_helper(mem_buf_desc_t *buff, mem_buf_desc_t *buff_wqe,
-                                              buff_status_e status,
-                                              uintptr_t *p_recycle_buffers_last_wr_id)
+                                             buff_status_e status,
+                                             uintptr_t *p_recycle_buffers_last_wr_id)
 {
     int ret_total = 0;
     if (buff_wqe && (++m_debt >= (int)m_n_sysvar_rx_num_wr_to_post_recv) &&
@@ -369,8 +369,7 @@ int cq_mgr_rx_strq::drain_and_process(uintptr_t *p_recycle_buffers_last_wr_id)
             return ret_total;
         }
 
-        ret_total +=
-            drain_and_process_helper(buff, buff_wqe, status, p_recycle_buffers_last_wr_id);
+        ret_total += drain_and_process_helper(buff, buff_wqe, status, p_recycle_buffers_last_wr_id);
     }
 
     update_global_sn_rx(cq_poll_sn, ret_total);

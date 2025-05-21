@@ -41,3 +41,16 @@ repos:
     hooks:
       - id: typos
         name: "[CHECK] Spelling errors"
+
+  # Code formatting
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v16.0.6
+    hooks:
+      - id: clang-format
+        name: "[FORMAT] C/C++ code"
+        # We use a custom .clang-format config file
+        args: ["-style=file"]
+        # Exactly match the style.sh inclusion patterns for file types and directories
+        files: '^(src/.*\.(c|cpp|h|cc)|tools/daemon/.*\.(c|cpp|h|cc)|tests/gtest/.*\.(c|cpp|h|cc))$'
+        # Exclude the same files as style.sh
+        exclude: '^(src/.*config_.*\..*|tests/gtest/googletest/.*|tests/gtest/.*/tap\.h|tests/gtest/.*/gtest\.h|tests/gtest/.*/gtest-all\.cc)$'
